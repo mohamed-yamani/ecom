@@ -22,7 +22,7 @@ class ContactUsScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('Whatsapp us',
+                      Text('تواصل معنا عبر واتساب',
                           style: TextStyle(color: Colors.white, fontSize: 20)),
                       SizedBox(
                         width: 10,
@@ -50,7 +50,7 @@ class ContactUsScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('Call us',
+                      Text('اتصل بنا عبر الهاتف',
                           style: TextStyle(color: Colors.white, fontSize: 20)),
                       SizedBox(
                         width: 10,
@@ -77,7 +77,7 @@ class ContactUsScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('Email us',
+                      Text('راسلنا عبر البريد الإلكتروني',
                           style: TextStyle(color: Colors.white, fontSize: 20)),
                       SizedBox(
                         width: 10,
@@ -104,7 +104,7 @@ class ContactUsScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('Message us',
+                      Text('راسلنا عبر الرسائل القصيرة',
                           style: TextStyle(color: Colors.white, fontSize: 20)),
                       SizedBox(
                         width: 10,
@@ -132,7 +132,7 @@ class ContactUsScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('facebook page',
+                      Text('صفحتنا على الفيس بوك',
                           style: TextStyle(color: Colors.white, fontSize: 20)),
                       SizedBox(
                         width: 10,
@@ -166,7 +166,7 @@ class ContactUsScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('instagram page',
+                      Text('صفحتنا على الانستغرام',
                           style: TextStyle(color: Colors.white, fontSize: 20)),
                       SizedBox(
                         width: 10,

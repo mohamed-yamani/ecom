@@ -19,11 +19,11 @@ class BottomBarScreen extends StatefulWidget {
 class _BottomBarScreenState extends State<BottomBarScreen> {
   int _selectedPageIndex = 0;
   final List<Map<String, dynamic>> _pages = const [
-    {'page': HomeScreen(), 'title': 'Home'},
-    {'page': CategoriesScreen(), 'title': 'الفئات'},
-    {'page': CartScreen(), 'title': 'Cart'},
-    {'page': UserScreen(), 'title': 'User'},
     {'page': ContactUsScreen(), 'title': 'Contact Us'},
+    {'page': UserScreen(), 'title': 'User'},
+    {'page': CartScreen(), 'title': 'Cart'},
+    {'page': CategoriesScreen(), 'title': 'الفئات'},
+    {'page': HomeScreen(), 'title': 'Home'},
   ];
 
   void _changeSelectedPageIndex(int index) {
@@ -36,59 +36,33 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
-        // appBar: AppBar(
-        //   centerTitle: true,
-        //   backgroundColor: Colors.transparent,
-        //   elevation: 0,
-        //   title: Text(
-        //     _pages[_selectedPageIndex]['title'],
-        //     style: TextStyle(
-        //         color: themeState.getDarkTheme ? Colors.white : Colors.black),
-        //     textAlign: TextAlign.center,
-        //   ),
-        //   actions: [
-        //     IconButton(
-        //         onPressed: () {
-        //           themeState.setDarkTheme = !themeState.getDarkTheme;
-        //         },
-        //         icon: Icon(
-        //           themeState.getDarkTheme
-        //               ? Ionicons.moon_outline
-        //               : Ionicons.sunny_outline,
-        //           color: themeState.getDarkTheme ? Colors.white : Colors.black,
-        //         ))
-        //   ],
-        // ),
-
         body: SafeArea(
           child: _pages[_selectedPageIndex]['page'],
         ),
         bottomNavigationBar: BottomNavigationBar(
-          // backgroundColor:
-          //     Colors.transparent ? Theme.of(context).cardColor : Colors.white,
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.home),
-              label: "Home",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.square_grid_2x2),
-              label: "Categories",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.cart),
-              label: "Cart",
+              icon: Icon(CupertinoIcons.phone_arrow_up_right),
+              label: "Contact Us",
             ),
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.person),
               label: "User",
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.phone_arrow_up_right),
-              label: "Contact Us",
+              icon: Icon(CupertinoIcons.cart),
+              label: "Cart",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.square_grid_2x2),
+              label: "Categories",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.home),
+              label: "Home",
             ),
           ],
           onTap: _changeSelectedPageIndex,

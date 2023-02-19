@@ -47,7 +47,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '199 DH',
+                          '199 درهم',
                           style: themeState.getDarkTheme
                               ? const TextStyle(
                                   color: Colors.white,
@@ -93,6 +93,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'التوصيل بالمجان',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 252, 8, 195),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
@@ -109,12 +120,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: const [
-                          Icon(
-                            CupertinoIcons.cart_badge_plus,
-                            size: 25,
-                            color: Color.fromARGB(255, 252, 8, 195),
-                          ),
-                          SizedBox(width: 10),
                           Text(
                             'أضف إلى السلة',
                             style: TextStyle(
@@ -122,18 +127,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
+                          SizedBox(width: 10),
+                          Icon(
+                            CupertinoIcons.cart_badge_plus,
+                            size: 25,
+                            color: Color.fromARGB(255, 252, 8, 195),
+                          ),
                         ],
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      'التوصيل بالمجان',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 252, 8, 195),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
