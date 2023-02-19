@@ -53,6 +53,7 @@ class _MyAppState extends State<MyApp> {
           theme: Styles.themeData(themeProvider.getDarkTheme, context),
           home: const BottomBarScreen(),
         );
+        
       }),
     );
   }

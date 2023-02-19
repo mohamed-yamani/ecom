@@ -36,30 +36,33 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Text(
-            _pages[_selectedPageIndex]['title'],
-            style: TextStyle(
-                color: themeState.getDarkTheme ? Colors.white : Colors.black),
-            textAlign: TextAlign.center,
-          ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  themeState.setDarkTheme = !themeState.getDarkTheme;
-                },
-                icon: Icon(
-                  themeState.getDarkTheme
-                      ? Ionicons.moon_outline
-                      : Ionicons.sunny_outline,
-                  color: themeState.getDarkTheme ? Colors.white : Colors.black,
-                ))
-          ],
+        // appBar: AppBar(
+        //   centerTitle: true,
+        //   backgroundColor: Colors.transparent,
+        //   elevation: 0,
+        //   title: Text(
+        //     _pages[_selectedPageIndex]['title'],
+        //     style: TextStyle(
+        //         color: themeState.getDarkTheme ? Colors.white : Colors.black),
+        //     textAlign: TextAlign.center,
+        //   ),
+        //   actions: [
+        //     IconButton(
+        //         onPressed: () {
+        //           themeState.setDarkTheme = !themeState.getDarkTheme;
+        //         },
+        //         icon: Icon(
+        //           themeState.getDarkTheme
+        //               ? Ionicons.moon_outline
+        //               : Ionicons.sunny_outline,
+        //           color: themeState.getDarkTheme ? Colors.white : Colors.black,
+        //         ))
+        //   ],
+        // ),
+
+        body: SafeArea(
+          child: _pages[_selectedPageIndex]['page'],
         ),
-        body: _pages[_selectedPageIndex]['page'],
         bottomNavigationBar: BottomNavigationBar(
           // backgroundColor:
           //     Colors.transparent ? Theme.of(context).cardColor : Colors.white,

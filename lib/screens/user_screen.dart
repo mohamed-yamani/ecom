@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
@@ -21,6 +23,8 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeState = Provider.of<DarkThemeProvider>(context);
+
     TextEditingController();
     return Scaffold(
       body: ListView(
@@ -100,6 +104,26 @@ class _UserScreenState extends State<UserScreen> {
               subtitle: 'Logout from your account',
               onTap: () => _showLogOutDialog(),
               trailingIcon: null),
+          const SizedBox(
+            height: 20,
+          ),
+
+          Center(
+              child: SwitchListTile(
+                  title: Text('theme',
+                      style: TextStyle(
+                          color: themeState.getDarkTheme
+                              ? Colors.white
+                              : Colors.black)),
+                  secondary: Icon(
+                      themeState.getDarkTheme
+                          ? CupertinoIcons.moon
+                          : CupertinoIcons.sun_max,
+                      color: Theme.of(context).primaryColor),
+                  value: themeState.getDarkTheme,
+                  onChanged: (bool value) {
+                    themeState.setDarkTheme = value;
+                  })),
         ],
       ),
     );
