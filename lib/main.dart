@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:marocbeauty/consts/theme_data.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/screens/all_products_widget.dart';
 import 'package:marocbeauty/screens/bottom_bar_screen.dart';
-import 'package:marocbeauty/screens/home_screen.dart';
-import 'package:marocbeauty/services/dark_theme_pref.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -52,8 +51,11 @@ class _MyAppState extends State<MyApp> {
           title: 'Flutter Demo',
           theme: Styles.themeData(themeProvider.getDarkTheme, context),
           home: const BottomBarScreen(),
+          routes: {
+            // HomeScreen.routeName: (context) => const HomeScreen(),
+            AllProductsWidget.routeName: (context) => const AllProductsWidget(),
+          },
         );
-        
       }),
     );
   }
