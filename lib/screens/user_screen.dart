@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/services/global_methods.dart';
 import 'package:provider/provider.dart';
 
 class UserScreen extends StatefulWidget {
@@ -32,8 +33,8 @@ class _UserScreenState extends State<UserScreen> {
           listTile(
               context: context,
               icon: CupertinoIcons.person,
-              title: 'John Doe',
-              subtitle: 'Edit your profile',
+              title: 'فلان الفلاني',
+              subtitle: 'فلان الفلاني',
               onTap: () => {},
               trailingIcon: null),
           const SizedBox(
@@ -42,7 +43,7 @@ class _UserScreenState extends State<UserScreen> {
           listTile(
               context: context,
               icon: CupertinoIcons.phone,
-              title: 'Phone',
+              title: 'الهاتف',
               subtitle: '+33 6 00 00 00 00',
               onTap: () => {},
               trailingIcon: null),
@@ -52,8 +53,8 @@ class _UserScreenState extends State<UserScreen> {
           listTile(
               context: context,
               icon: CupertinoIcons.location,
-              title: 'Addresses',
-              subtitle: 'Manage your addresses',
+              title: 'العنوان',
+              subtitle: 'المغرب, الرباط',
               onTap: () async {
                 _showAddressDialog();
               },
@@ -65,8 +66,8 @@ class _UserScreenState extends State<UserScreen> {
           listTile(
               context: context,
               icon: CupertinoIcons.bag,
-              title: 'Orders',
-              subtitle: 'View your orders',
+              title: 'الطلبات',
+              subtitle: 'عرض الطلبات',
               onTap: () => {},
               trailingIcon: null),
           const SizedBox(
@@ -75,22 +76,22 @@ class _UserScreenState extends State<UserScreen> {
           // addresses
 
           // Wishlist
-          listTile(
-              context: context,
-              icon: CupertinoIcons.heart,
-              title: 'Wishlist',
-              subtitle: 'View your wishlist',
-              onTap: () => {},
-              trailingIcon: null),
-          const SizedBox(
-            height: 20,
-          ),
+          // listTile(
+          //     context: context,
+          //     icon: CupertinoIcons.heart,
+          //     title: 'Wishlist',
+          //     subtitle: 'View your wishlist',
+          //     onTap: () => {},
+          //     trailingIcon: null),
+          // const SizedBox(
+          //   height: 20,
+          // ),
           // Viewed products
           listTile(
               context: context,
               icon: CupertinoIcons.eyeglasses,
-              title: 'Viewed products',
-              subtitle: 'View your viewed products',
+              title: 'المنتجات المشاهدة',
+              subtitle: 'عرض المنتجات المشاهدة',
               onTap: () => {},
               trailingIcon: null),
           // logout
@@ -100,9 +101,13 @@ class _UserScreenState extends State<UserScreen> {
           listTile(
               context: context,
               icon: CupertinoIcons.arrow_uturn_left,
-              title: 'Logout',
-              subtitle: 'Logout from your account',
-              onTap: () => _showLogOutDialog(),
+              title: 'تسجيل الخروج',
+              subtitle: 'تسجيل الخروج',
+              onTap: () => GlobalMethods().warningDialog(
+                  context: context,
+                  title: "تسجيل الخروج",
+                  subtitle: "هل تريد تسجيل الخروج؟",
+                  function: () => {}),
               trailingIcon: null),
           const SizedBox(
             height: 20,
@@ -110,7 +115,7 @@ class _UserScreenState extends State<UserScreen> {
 
           Center(
               child: SwitchListTile(
-                  title: Text('Theme',
+                  title: Text('السمة',
                       style: TextStyle(
                           color: themeState.getDarkTheme
                               ? Colors.white
@@ -127,46 +132,6 @@ class _UserScreenState extends State<UserScreen> {
         ],
       ),
     );
-  }
-
-  Future<void> _showLogOutDialog() async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Row(
-              children: [
-                Icon(
-                  CupertinoIcons.exclamationmark_circle,
-                  color: Theme.of(context).primaryColor,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text('Logout'),
-              ],
-            ),
-            content: const Text('Are you sure you want to logout?'),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                  )),
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    'Logout',
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                  )),
-            ],
-          );
-        });
   }
 
   Future<void> _showAddressDialog() async {

@@ -52,6 +52,13 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: TitleWidget(
+                        title: "العروض",
+                      ),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextButton(
                         onPressed: () {
                           globalMethods.navigateToPage(
@@ -69,20 +76,13 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: TitleWidget(
-                        title: "العروض",
-                      ),
-                    ),
                   ],
                 ),
                 SizedBox(
                   height: size.height * 0.23,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    controller: ScrollController(initialScrollOffset: 90000),
+                    controller: ScrollController(),
                     // rtl
                     shrinkWrap: true,
                     // physics: const NeverScrollableScrollPhysics(),
@@ -102,6 +102,13 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: TitleWidget(
+                        title: "الجديد",
+                      ),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextButton(
                         onPressed: () {
                           globalMethods.navigateToPage(
@@ -119,20 +126,13 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: TitleWidget(
-                        title: "الجديد",
-                      ),
-                    ),
                   ],
                 ),
                 SizedBox(
                   height: size.height * 0.23,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    controller: ScrollController(initialScrollOffset: 90000),
+                    controller: ScrollController(),
                     // rtl
                     shrinkWrap: true,
                     // physics: const NeverScrollableScrollPhysics(),
@@ -154,6 +154,13 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: TitleWidget(
+                        title: "الأكثر مبيعا",
+                      ),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextButton(
                         onPressed: () {
                           globalMethods.navigateToPage(
@@ -171,20 +178,13 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: TitleWidget(
-                        title: "الأكثر مبيعا",
-                      ),
-                    ),
                   ],
                 ),
                 SizedBox(
                   height: size.height * 0.23,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    controller: ScrollController(initialScrollOffset: 90000),
+                    controller: ScrollController(),
                     // rtl
                     shrinkWrap: true,
                     // physics: const NeverScrollableScrollPhysics(),

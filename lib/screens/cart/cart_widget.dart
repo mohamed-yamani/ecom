@@ -31,12 +31,11 @@ class _CartWidgetState extends State<CartWidget> {
                   children: [
                     InkWell(
                       onTap: () => {
-                        globalMethods.showDialogg(
-                          title: 'Delete Product',
-                          content:
-                              'Are you sure you want to delete this product?',
-                          context: context,
-                        ),
+                        GlobalMethods().warningDialog(
+                            context: context,
+                            title: "حذف المنتج",
+                            subtitle: "هل تريد حذف المنتج من السلة؟",
+                            function: () => {}),
                       },
                       child: const SizedBox(
                         height: 30,
