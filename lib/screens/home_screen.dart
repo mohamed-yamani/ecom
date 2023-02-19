@@ -77,8 +77,6 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ],
-
-                  /// rtl
                 ),
                 SizedBox(
                   height: size.height * 0.23,
