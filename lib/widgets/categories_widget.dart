@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:marocbeauty/screens/all_products_widget.dart';
+import 'package:marocbeauty/services/global_methods.dart';
 
 // categoryImage: 'assets/images/category1.png',
 //               categoryName: 'منتجات للعناية بالبشرة',
@@ -19,11 +21,14 @@ class CategoriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    GlobalMethods globalMethods = GlobalMethods();
     return Container(
       // color: Colors.red,
       child: InkWell(
         onTap: () {
           print('Category Clicked');
+          globalMethods.navigateToPage(
+              context: context, page: AllProductsWidget.routeName);
         },
         child: Column(
           children: [

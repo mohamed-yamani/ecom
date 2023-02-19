@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/screens/all_products_widget.dart';
+import 'package:marocbeauty/services/global_methods.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:marocbeauty/widgets/new_products_widget.dart';
 import 'package:marocbeauty/widgets/title_widget.dart';
@@ -20,6 +21,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
     Size size = Utils(context).getScreenSize;
+    GlobalMethods globalMethods = GlobalMethods();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -51,9 +54,9 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            AllProductsWidget.routeName,
-                          );
+                          globalMethods.navigateToPage(
+                              context: context,
+                              page: AllProductsWidget.routeName);
                         },
                         child: Text(
                           "عرض الكل",
@@ -101,9 +104,9 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            AllProductsWidget.routeName,
-                          );
+                          globalMethods.navigateToPage(
+                              context: context,
+                              page: AllProductsWidget.routeName);
                         },
                         child: const Text(
                           "عرض الكل",
@@ -151,9 +154,9 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            AllProductsWidget.routeName,
-                          );
+                          globalMethods.navigateToPage(
+                              context: context,
+                              page: AllProductsWidget.routeName);
                         },
                         child: Text(
                           "عرض الكل",
