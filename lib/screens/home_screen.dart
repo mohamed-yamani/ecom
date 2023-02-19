@@ -108,10 +108,12 @@ class HomeScreen extends StatelessWidget {
                               context: context,
                               page: AllProductsWidget.routeName);
                         },
-                        child: const Text(
+                        child: Text(
                           "عرض الكل",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: themeState.getDarkTheme == true
+                                ? Colors.white
+                                : Colors.black,
                             fontSize: 16,
                           ),
                         ),
@@ -161,7 +163,9 @@ class HomeScreen extends StatelessWidget {
                         child: Text(
                           "عرض الكل",
                           style: TextStyle(
-                            color: Theme.of(context).textTheme.headline3!.color,
+                            color: themeState.getDarkTheme == true
+                                ? Colors.white
+                                : Colors.black,
                             fontSize: 16,
                           ),
                         ),

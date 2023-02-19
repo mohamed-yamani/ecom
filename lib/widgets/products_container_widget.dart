@@ -1,6 +1,8 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marocbeauty/screens/product_details_screen.dart';
+import 'package:marocbeauty/services/global_methods.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:marocbeauty/widgets/price_widget.dart';
 
@@ -25,11 +27,15 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
   Widget build(BuildContext context) {
     final theme = Utils(context).getTheme;
     Size size = Utils(context).getScreenSize;
+    GlobalMethods globalMethods = GlobalMethods();
     return Container(
       height: widget.height,
       width: widget.width,
       child: InkWell(
-          onTap: () {},
+          onTap: () {
+            globalMethods.navigateToPage(
+                context: context, page: ProductDetailsScreen.routeName);
+          },
           borderRadius: BorderRadius.circular(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -110,7 +110,7 @@ class _UserScreenState extends State<UserScreen> {
 
           Center(
               child: SwitchListTile(
-                  title: Text('theme',
+                  title: Text('Theme',
                       style: TextStyle(
                           color: themeState.getDarkTheme
                               ? Colors.white
