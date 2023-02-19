@@ -106,10 +106,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             : Colors.white,
                       ),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: const [
                           Icon(
                             CupertinoIcons.cart_badge_plus,
-                            size: 20,
+                            size: 25,
+                            color: Color.fromARGB(255, 252, 8, 195),
                           ),
                           SizedBox(width: 10),
                           Text(
