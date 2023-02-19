@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:marocbeauty/widgets/price_widget.dart';
 
-class NewProductsWidget extends StatefulWidget {
+class ProductContainerWidget extends StatefulWidget {
   double height;
   double width;
   double imgHeight;
   double imgWidth;
-  NewProductsWidget(
+  ProductContainerWidget(
       {super.key,
       required this.height,
       required this.width,
@@ -17,10 +17,10 @@ class NewProductsWidget extends StatefulWidget {
       required this.imgWidth});
 
   @override
-  State<NewProductsWidget> createState() => _NewProductsWidgetState();
+  State<ProductContainerWidget> createState() => _ProductContainerWidgetState();
 }
 
-class _NewProductsWidgetState extends State<NewProductsWidget> {
+class _ProductContainerWidgetState extends State<ProductContainerWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Utils(context).getTheme;
@@ -58,18 +58,18 @@ class _NewProductsWidgetState extends State<NewProductsWidget> {
                         top: 3,
                         left: 3,
                         child: Container(
-                          height: 18,
-                          width: 30,
+                          height: 22,
+                          // width: 45,
                           decoration: BoxDecoration(
                             color: Colors.red,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(5),
                           ),
                           child: const Center(
                             child: Text(
-                              '-20%',
+                              '-25%',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 10,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -106,8 +106,8 @@ class _NewProductsWidgetState extends State<NewProductsWidget> {
                 ],
               ),
               PriceWidget(
-                price: '200dh',
-                oldPrice: '250dh',
+                price: 200.0,
+                oldPrice: 250.0,
                 width: widget.imgWidth,
               ),
               // add to cart

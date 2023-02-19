@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
-import 'package:marocbeauty/screens/cart_screen.dart';
+import 'package:marocbeauty/screens/cart/cart_screen.dart';
 import 'package:marocbeauty/screens/categories_screen.dart';
 import 'package:marocbeauty/screens/contact_us.dart';
 import 'package:marocbeauty/screens/home_screen.dart';

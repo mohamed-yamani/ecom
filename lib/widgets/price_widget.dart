@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PriceWidget extends StatelessWidget {
-  String price;
-  String oldPrice;
+  double price;
+  double oldPrice;
   double width;
 
   PriceWidget(
@@ -20,20 +20,23 @@ class PriceWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            price,
+            '$price DH',
             style: TextStyle(
               color: Theme.of(context).textTheme.bodyText1!.color,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(width: 5),
-          Text(
-            oldPrice,
-            style: const TextStyle(
-              color: Colors.grey,
-              decoration: TextDecoration.lineThrough,
-            ),
-          ),
+          // const SizedBox(width: 5),
+          price != oldPrice
+              ? Text(
+                  '$oldPrice DH',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                    decoration: TextDecoration.lineThrough,
+                  ),
+                )
+              : const SizedBox.shrink(),
         ],
       ),
     );
