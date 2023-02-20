@@ -19,24 +19,25 @@ class PriceWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            '$price DH',
-            style: TextStyle(
-              color: Theme.of(context).textTheme.bodyText1!.color,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          // const SizedBox(width: 5),
           price != oldPrice
               ? Text(
-                  '$oldPrice DH',
+                  '$oldPrice',
                   style: const TextStyle(
-                    fontSize: 12,
+                    fontSize: 8,
                     color: Colors.grey,
                     decoration: TextDecoration.lineThrough,
                   ),
                 )
               : const SizedBox.shrink(),
+          Text(
+            '$price درهم',
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyText1!.color,
+              fontWeight: FontWeight.bold,
+              fontSize: 11,
+            ),
+          ),
+          // const SizedBox(width: 5),
         ],
       ),
     );

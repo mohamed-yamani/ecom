@@ -44,36 +44,24 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          items: [
-            const BottomNavigationBarItem(
+          items: const [
+            BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.phone_arrow_up_right),
               label: "Contact Us",
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.person),
               label: "User",
             ),
             BottomNavigationBarItem(
-              icon: Badge(
-                  // toAnimate: false,
-                  position: BadgePosition.topEnd(top: -10, end: 16),
-                  badgeContent: const Text(
-                    '2',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  badgeStyle: BadgeStyle(
-                    badgeColor: Theme.of(context).primaryColor,
-                    elevation: 3,
-                    // padding: const EdgeInsets.all(1),
-                  ),
-                  child: const Icon(CupertinoIcons.cart)),
+              icon: Icon(CupertinoIcons.cart),
               label: "Cart",
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.square_grid_2x2),
               label: "Categories",
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.home),
               label: "Home",
             ),

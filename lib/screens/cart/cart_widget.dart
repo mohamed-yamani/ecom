@@ -67,12 +67,10 @@ class _CartWidgetState extends State<CartWidget> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
+                        const Text(
                           'وصف المنتج',
                           style: TextStyle(
-                            color: themeState.getDarkTheme
-                                ? Colors.white
-                                : Colors.black,
+                            color: Colors.grey,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
@@ -84,7 +82,7 @@ class _CartWidgetState extends State<CartWidget> {
                           '199 درهم',
                           style: TextStyle(
                             color: themeState.getDarkTheme
-                                ? Colors.white
+                                ? Colors.grey
                                 : Colors.black,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
@@ -93,10 +91,10 @@ class _CartWidgetState extends State<CartWidget> {
                       ],
                     ),
                   ),
-                  const Spacer(),
+                  // const Spacer(),
 
                   SizedBox(
-                    width: size.width * 0.24,
+                    width: size.width * 0.26,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

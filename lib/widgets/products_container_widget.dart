@@ -32,119 +32,120 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
       height: widget.height,
       width: widget.width,
       child: InkWell(
-          onTap: () {
-            globalMethods.navigateToPage(
-                context: context, page: ProductDetailsScreen.routeName);
-          },
-          borderRadius: BorderRadius.circular(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: FancyShimmerImage(
-                          imageUrl:
-                              'https://cdn.youcan.shop/stores/c749137d893cf429107e4a8c5fd443b6/products/bFyGtp4QUP8hQqPaFEIy8JWcw0BQkuKPEaf8BYWC_lg.png',
-                          boxFit: BoxFit.fill,
-                          // height: size.height * 0.16,
-                          // width: size.height * 0.16,
-                          height: widget.imgHeight,
-                          width: widget.imgWidth,
+        onTap: () {
+          globalMethods.navigateToPage(
+              context: context, page: ProductDetailsScreen.routeName);
+        },
+        borderRadius: BorderRadius.circular(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: FancyShimmerImage(
+                        imageUrl:
+                            'https://cdn.youcan.shop/stores/c749137d893cf429107e4a8c5fd443b6/products/bFyGtp4QUP8hQqPaFEIy8JWcw0BQkuKPEaf8BYWC_lg.png',
+                        boxFit: BoxFit.fill,
+                        // height: size.height * 0.16,
+                        // width: size.height * 0.16,
+                        height: widget.imgHeight,
+                        width: widget.imgWidth,
+                      ),
+                    ),
+                    //
+                    Positioned(
+                      top: 3,
+                      left: 3,
+                      child: Container(
+                        height: 22,
+                        // width: 45,
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            '25%-',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                         ),
                       ),
-                      //
-                      Positioned(
-                        top: 3,
-                        left: 3,
-                        child: Container(
-                          height: 22,
-                          // width: 45,
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: const Center(
+                    ),
+                    Positioned(
+                      bottom: 3,
+                      right: 3,
+                      child: Container(
+                        height: 18,
+                        // width: 30,
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5),
                             child: Text(
-                              '-25%',
+                              'cc cream',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 10,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      Positioned(
-                        bottom: 3,
-                        right: 3,
-                        child: Container(
-                          height: 18,
-                          // width: 30,
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Center(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5),
-                              child: Text(
-                                'cc cream',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+            PriceWidget(
+              price: 200.0,
+              oldPrice: 250.0,
+              width: widget.imgWidth,
+            ),
+            // add to cart
+            Container(
+              height: 27,
+              width: widget.imgWidth,
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor.withOpacity(0.6),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: const [
+                  Text(
+                    'أضف للسلة',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Icon(
+                    CupertinoIcons.cart,
+                    color: Colors.white,
                   ),
                 ],
               ),
-              PriceWidget(
-                price: 200.0,
-                oldPrice: 250.0,
-                width: widget.imgWidth,
-              ),
-              // add to cart
-              Container(
-                height: 27,
-                width: widget.imgWidth,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    Icon(
-                      CupertinoIcons.cart,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'أضف للسلة',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

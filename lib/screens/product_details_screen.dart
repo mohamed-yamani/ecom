@@ -46,6 +46,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // const SizedBox(height: 10),
+                        TitleWidget(title: 'كريم أساس خافي للعيوب'),
                         Text(
                           '199 درهم',
                           style: themeState.getDarkTheme
@@ -58,26 +60,25 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold),
                         ),
-                        // const SizedBox(height: 10),
-                        TitleWidget(title: 'كريم أساس خافي للعيوب'),
                       ],
                     ),
                     const SizedBox(height: 10),
                     Text(
                       '''صديقة للبشرة وسلسة وتضغط بسهولة وبالتساوي.
-رأس اسفنجي لطيف يصبح أكبر وأنعم وسهل الاستخدام عندما يلتقي بالماء.
-يغطي عيوب البشرة بشكل طبيعي ويخفي المسام ويخلق مكياج مرطب طبيعي.
-ملمس ناعم ورقيق، لا يسد المسام، مما يسمح للبشرة بالتنفس بحرية.
-ما يجب مراعاته قبل المكياج:
-إذا كنتي ترغبين في جعله يبدو جيداً ويدوم طويلاً. قومي بما يلي:
-التزمي بالعناية الأساسية للبشرة.
-يجب تنظيف الرأس الاسفنجي على شكل الفطر قبل الاستخدام.
-ضعي المكياج بطريقة الكبس بسرعة حتى يصبح المكياج أكثر سلاسة.
-بعد وضع المكياج، استخدمي البودرة، ثم استخدمي بخاخ تثبيت المكياج ورشي المكياج برفق. هذا المكياج يمكن أن يحقق تأثيراً يدوم طويلاً.''',
+          رأس اسفنجي لطيف يصبح أكبر وأنعم وسهل الاستخدام عندما يلتقي بالماء.
+          يغطي عيوب البشرة بشكل طبيعي ويخفي المسام ويخلق مكياج مرطب طبيعي.
+          ملمس ناعم ورقيق، لا يسد المسام، مما يسمح للبشرة بالتنفس بحرية.
+          ما يجب مراعاته قبل المكياج:
+          إذا كنتي ترغبين في جعله يبدو جيداً ويدوم طويلاً. قومي بما يلي:
+          التزمي بالعناية الأساسية للبشرة.
+          يجب تنظيف الرأس الاسفنجي على شكل الفطر قبل الاستخدام.
+          ضعي المكياج بطريقة الكبس بسرعة حتى يصبح المكياج أكثر سلاسة.
+          بعد وضع المكياج، استخدمي البودرة، ثم استخدمي بخاخ تثبيت المكياج ورشي المكياج برفق. هذا المكياج يمكن أن يحقق تأثيراً يدوم طويلاً.''',
                       style: themeState.getDarkTheme
                           ? const TextStyle(color: Colors.white, fontSize: 15)
                           : const TextStyle(color: Colors.black, fontSize: 15),
-                      textDirection: TextDirection.rtl,
+                      // textDirection: TextDirection.rtl,
+                      // textAlign: TextAlign.right,
                     ),
                   ],
                 ),
@@ -123,7 +124,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           Text(
                             'أضف إلى السلة',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 13,
                               fontWeight: FontWeight.w600,
                             ),
                           ),

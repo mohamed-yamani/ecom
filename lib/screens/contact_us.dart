@@ -27,7 +27,7 @@ class ContactUsScreen extends StatelessWidget {
                       SizedBox(
                         width: 10,
                       ),
-                      Icon(Icons.whatsapp),
+                      Icon(Icons.whatshot),
                     ],
                   ),
                 ),

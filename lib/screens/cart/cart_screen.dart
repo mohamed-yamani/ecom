@@ -56,7 +56,7 @@ class CheckOutWidget extends StatelessWidget {
               child: Text(
                 '1000 درهم',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 13,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -66,7 +66,7 @@ class CheckOutWidget extends StatelessWidget {
               child: Text(
                 'المجموع',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 13,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -84,7 +84,7 @@ class CheckOutWidget extends StatelessWidget {
                 child: const Text(
                   'اشتري الآن وادفع لاحقًا',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 13,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
