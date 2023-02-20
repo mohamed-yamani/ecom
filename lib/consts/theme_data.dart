@@ -9,7 +9,7 @@ class Styles {
               ? const Color.fromARGB(255, 7, 0, 5)
               : const Color(0xFFFFFFFF),
       // #E49296FF primaryColor
-      primaryColor: const Color.fromARGB(255, 255, 62, 71),
+      primaryColor: const Color.fromARGB(255, 250, 26, 168),
       // primaryColorLight: Color.fromARGB(255, 254, 169, 173),
       // primaryColorDark: Color.fromARGB(255, 155, 4, 11),
       backgroundColor: isDarkTheme

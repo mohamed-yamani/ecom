@@ -9,6 +9,14 @@ class GlobalMethods {
     );
   }
 
+  void navigateToPageWithReplacement(
+      {required BuildContext context, required String page}) {
+    Navigator.pushReplacementNamed(
+      context,
+      page,
+    );
+  }
+
   void showDialogg(
       {required BuildContext context,
       required String title,

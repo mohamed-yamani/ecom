@@ -2,6 +2,7 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/screens/empty_screen.dart';
 import 'package:marocbeauty/screens/orders/orders_widget.dart';
 import 'package:marocbeauty/services/global_methods.dart';
 import 'package:marocbeauty/services/utils.dart';
@@ -16,25 +17,31 @@ class OrdersScreen extends StatelessWidget {
     final themeState = Provider.of<DarkThemeProvider>(context);
     Size size = Utils(context).getScreenSize;
     GlobalMethods globalMethods = GlobalMethods();
+    bool _isEmpty = false;
     return Scaffold(
       body: Stack(
         children: [
-          ListView.separated(
-              itemCount: 10,
-              itemBuilder: ((context, index) {
-                return OrdersWidget(size: size, themeState: themeState);
-              }),
-              separatorBuilder: ((context, index) {
-                return Container(
-                    height: 14,
-                    color: Colors.transparent,
-                    child: const Divider(
-                      color: Colors.grey,
-                      // thickness: 1,
-                      endIndent: 30,
-                      indent: 30,
-                    ));
-              })),
+          _isEmpty
+              ? EmptyScreen(
+                  icon: Icons.shopping_cart,
+                  title: 'لا يوجد طلبات',
+                )
+              : ListView.separated(
+                  itemCount: 10,
+                  itemBuilder: ((context, index) {
+                    return OrdersWidget(size: size, themeState: themeState);
+                  }),
+                  separatorBuilder: ((context, index) {
+                    return Container(
+                        height: 14,
+                        color: Colors.transparent,
+                        child: const Divider(
+                          color: Colors.grey,
+                          // thickness: 1,
+                          endIndent: 30,
+                          indent: 30,
+                        ));
+                  })),
           Positioned(
             top: size.height * 0.05,
             right: size.width * 0.05,

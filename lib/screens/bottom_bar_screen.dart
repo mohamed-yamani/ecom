@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
@@ -17,7 +18,7 @@ class BottomBarScreen extends StatefulWidget {
 }
 
 class _BottomBarScreenState extends State<BottomBarScreen> {
-  int _selectedPageIndex = 0;
+  int _selectedPageIndex = 4;
   final List<Map<String, dynamic>> _pages = const [
     {'page': ContactUsScreen(), 'title': 'Contact Us'},
     {'page': UserScreen(), 'title': 'User'},
@@ -43,24 +44,36 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          items: const [
-            BottomNavigationBarItem(
+          items: [
+            const BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.phone_arrow_up_right),
               label: "Contact Us",
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.person),
               label: "User",
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.cart),
+              icon: Badge(
+                  // toAnimate: false,
+                  position: BadgePosition.topEnd(top: -10, end: 16),
+                  badgeContent: const Text(
+                    '2',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  badgeStyle: BadgeStyle(
+                    badgeColor: Theme.of(context).primaryColor,
+                    elevation: 3,
+                    // padding: const EdgeInsets.all(1),
+                  ),
+                  child: const Icon(CupertinoIcons.cart)),
               label: "Cart",
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.square_grid_2x2),
               label: "Categories",
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.home),
               label: "Home",
             ),

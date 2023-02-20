@@ -121,7 +121,7 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
                 height: 27,
                 width: widget.imgWidth,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 250, 26, 168),
+                  color: Theme.of(context).primaryColor.withOpacity(0.6),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Row(
