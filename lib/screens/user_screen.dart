@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/screens/orders/orders_screen.dart';
 import 'package:marocbeauty/services/global_methods.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,7 @@ class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
+    GlobalMethods globalMethods = GlobalMethods();
 
     TextEditingController();
     return Scaffold(
@@ -68,7 +70,10 @@ class _UserScreenState extends State<UserScreen> {
               icon: CupertinoIcons.bag,
               title: 'الطلبات',
               subtitle: 'عرض الطلبات',
-              onTap: () => {},
+              onTap: () => {
+                    globalMethods.navigateToPage(
+                        context: context, page: OrdersScreen.routeName)
+                  },
               trailingIcon: null),
           const SizedBox(
             height: 20,

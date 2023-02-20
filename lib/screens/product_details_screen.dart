@@ -149,16 +149,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 Navigator.of(context).pop();
               },
               icon: Container(
-                height: 30,
-                width: 30,
                 decoration: BoxDecoration(
                   color: themeState.getDarkTheme
                       ? Colors.grey[900]!.withOpacity(0.5)
                       : Colors.grey[200]!.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(10),
                 ),
+                padding: const EdgeInsets.only(right: 9),
                 child: Center(
-                  child: Icon(CupertinoIcons.xmark,
+                  child: Icon(Icons.arrow_back_ios,
                       color: themeState.getDarkTheme
                           ? Colors.white
                           : Colors.black),
