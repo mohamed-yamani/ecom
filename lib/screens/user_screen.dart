@@ -130,6 +130,7 @@ class _UserScreenState extends State<UserScreen> {
                           ? CupertinoIcons.moon
                           : CupertinoIcons.sun_max,
                       color: Theme.of(context).primaryColor),
+                  activeColor: Theme.of(context).primaryColor,
                   value: themeState.getDarkTheme,
                   onChanged: (bool value) {
                     themeState.setDarkTheme = value;

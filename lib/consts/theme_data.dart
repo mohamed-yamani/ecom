@@ -13,12 +13,12 @@ class Styles {
       // primaryColorLight: Color.fromARGB(255, 254, 169, 173),
       // primaryColorDark: Color.fromARGB(255, 155, 4, 11),
       backgroundColor: isDarkTheme
-          ? Color.fromARGB(255, 249, 102, 183)
+          ? const Color.fromARGB(255, 249, 102, 183)
           : const Color.fromARGB(255, 255, 62, 71),
       colorScheme: ThemeData().colorScheme.copyWith(
             secondary: isDarkTheme
-                ? Color.fromARGB(255, 249, 102, 183)
-                : Color.fromARGB(255, 237, 152, 4),
+                ? const Color.fromARGB(255, 249, 102, 183)
+                : const Color.fromARGB(255, 237, 152, 4),
             brightness: isDarkTheme ? Brightness.dark : Brightness.light,
           ),
       cardColor: isDarkTheme
