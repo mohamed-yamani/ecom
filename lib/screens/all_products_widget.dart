@@ -13,7 +13,6 @@ class AllProductsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
     Size size = Utils(context).getScreenSize;
-    final color = Utils(context).color;
     return Scaffold(
       body: Stack(
         children: [

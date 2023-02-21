@@ -11,6 +11,7 @@ import 'package:marocbeauty/screens/user_screen.dart';
 import 'package:provider/provider.dart';
 
 class BottomBarScreen extends StatefulWidget {
+  static const routeName = '/bottom-bar-screen';
   const BottomBarScreen({super.key});
 
   @override
