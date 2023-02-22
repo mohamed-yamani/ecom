@@ -103,7 +103,7 @@ class _SignUpState extends State<SignUp> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   SizedBox(
-                    height: size.height * 0.15,
+                    height: size.height * 0.13,
                   ),
                   Text(
                     'مرحبا بك',
@@ -115,7 +115,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   Text(
                     'سجل الآن',
-                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                    style: Theme.of(context).textTheme.headline5!.copyWith(
                         color: Colors.white, fontWeight: FontWeight.w500),
                   ),
                   SizedBox(
@@ -156,7 +156,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                         SizedBox(
-                          height: size.height * 0.02,
+                          height: size.height * 0.002,
                         ),
                         TextFormField(
                           textInputAction: TextInputAction.next,

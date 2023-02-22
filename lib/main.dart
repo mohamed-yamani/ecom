@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:marocbeauty/consts/theme_data.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/screens/all_products_widget.dart';
+import 'package:marocbeauty/screens/auth/forget_password.dart';
 import 'package:marocbeauty/screens/auth/login.dart';
 import 'package:marocbeauty/screens/auth/sign_up.dart';
 import 'package:marocbeauty/screens/bottom_bar_screen.dart';
@@ -76,6 +77,7 @@ class _MyAppState extends State<MyApp> {
             BottomBarScreen.routeName: (context) => const BottomBarScreen(),
             SignUp.routeName: (context) => const SignUp(),
             LoginScreen.routeName: (context) => const LoginScreen(),
+            ForgetPassword.routeName: (context) => const ForgetPassword(),
           },
         );
       }),

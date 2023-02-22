@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marocbeauty/consts/constss.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/screens/auth/forget_password.dart';
 import 'package:marocbeauty/screens/auth/sign_up.dart';
 import 'package:marocbeauty/screens/bottom_bar_screen.dart';
 import 'package:marocbeauty/services/utils.dart';
@@ -210,7 +211,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(
+                                ForgetPassword.routeName,
+                              );
+                            },
                             child: Text(
                               'هل نسيت كلمة المرور؟',
                               style: Theme.of(context)
@@ -324,4 +329,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+
 }
