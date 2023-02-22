@@ -3,31 +3,38 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marocbeauty/consts/constss.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
-import 'package:marocbeauty/screens/auth/sign_up.dart';
+import 'package:marocbeauty/screens/auth/login.dart';
 import 'package:marocbeauty/screens/bottom_bar_screen.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const routeName = '/login';
-  const LoginScreen({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  static const routeName = '/sign-up';
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpState extends State<SignUp> {
+  final _fullNameController = TextEditingController();
   final _emailextController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  final _shippingAddressController = TextEditingController();
   final _passFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
+  bool _obscureTextConfirm = true;
 
   @override
   void dispose() {
     _emailextController.dispose();
     _passwordController.dispose();
     _passFocusNode.dispose();
+    _fullNameController.dispose();
+    _confirmPasswordController.dispose();
+    _shippingAddressController.dispose();
     super.dispose();
   }
 
@@ -99,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: size.height * 0.15,
                   ),
                   Text(
-                    'مرحبًا بعودتك',
+                    'مرحبا بك',
                     style: Theme.of(context).textTheme.headline3!.copyWith(
                         color: Colors.white, fontWeight: FontWeight.w500),
                   ),
@@ -107,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: size.height * 0.005,
                   ),
                   Text(
-                    'سجل دخولك للمتابعة',
+                    'سجل الآن',
                     style: Theme.of(context).textTheme.headline6!.copyWith(
                         color: Colors.white, fontWeight: FontWeight.w500),
                   ),
@@ -118,6 +125,39 @@ class _LoginScreenState extends State<LoginScreen> {
                     key: _formKey,
                     child: Column(
                       children: [
+                        TextFormField(
+                          textInputAction: TextInputAction.next,
+                          onEditingComplete: () => FocusScope.of(context)
+                              .requestFocus(_passFocusNode),
+                          controller: _fullNameController,
+                          keyboardType: TextInputType.name,
+                          validator: (value) {},
+                          decoration: InputDecoration(
+                            labelText: 'الاسم الكامل',
+                            labelStyle: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(color: Colors.white),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            border: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.02,
+                        ),
                         TextFormField(
                           textInputAction: TextInputAction.next,
                           onEditingComplete: () => FocusScope.of(context)
@@ -180,8 +220,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                               child: Icon(
                                 _obscureText
-                                    ? CupertinoIcons.eye
-                                    : CupertinoIcons.eye_slash,
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
                                 color: Colors.white,
                               ),
                             ),
@@ -207,17 +247,56 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              'هل نسيت كلمة المرور؟',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
-                                      color: Theme.of(context).primaryColor),
+                        SizedBox(
+                          height: size.height * 0.02,
+                        ),
+                        TextFormField(
+                          textInputAction: TextInputAction.done,
+                          onEditingComplete: _submitFormOnLogin,
+                          // focusNode: _passFocusNode,
+                          obscureText: _obscureTextConfirm,
+                          controller: _confirmPasswordController,
+                          keyboardType: TextInputType.visiblePassword,
+                          validator: (value) {
+                            if (value!.isEmpty || value.length < 5) {
+                              return 'الرجاء إدخال كلمة مرور صالحة';
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration: InputDecoration(
+                            suffix: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _obscureTextConfirm = !_obscureTextConfirm;
+                                });
+                              },
+                              child: Icon(
+                                _obscureTextConfirm
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.white,
+                              ),
+                            ),
+                            labelText: 'تأكيد كلمة المرور',
+                            labelStyle: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(color: Colors.white),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            border: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -247,68 +326,28 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           height: size.height * 0.02,
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          height: size.height * 0.07,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(
-                                SignUp.routeName,
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: Text(
-                              'إنشاء حساب جديد',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(color: Colors.black),
-                            ),
-                          ),
-                        ),
-                        // login with google
-                        SizedBox(
-                          height: size.height * 0.02,
-                        ),
-                        // or continue as guest
-                        SizedBox(
-                          height: size.height * 0.02,
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'أو تابع كضيف',
+                              'لديك حساب؟',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1!
                                   .copyWith(color: Colors.white),
                             ),
-                            SizedBox(
-                              width: size.width * 0.02,
-                            ),
-                            InkWell(
-                              onTap: () {
+                            TextButton(
+                              onPressed: () {
                                 Navigator.of(context).pushReplacementNamed(
-                                  BottomBarScreen.routeName,
+                                  LoginScreen.routeName,
                                 );
                               },
-                              child: Container(
-                                width: size.width * 0.1,
-                                height: size.width * 0.1,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                                child: Icon(
-                                  Icons.arrow_forward,
-                                  color: Theme.of(context).primaryColor,
-                                ),
+                              child: Text(
+                                'تسجيل الدخول',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(color: Colors.white),
                               ),
                             ),
                           ],

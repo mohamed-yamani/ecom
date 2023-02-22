@@ -5,6 +5,7 @@ import 'package:marocbeauty/consts/theme_data.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/screens/all_products_widget.dart';
 import 'package:marocbeauty/screens/auth/login.dart';
+import 'package:marocbeauty/screens/auth/sign_up.dart';
 import 'package:marocbeauty/screens/bottom_bar_screen.dart';
 import 'package:marocbeauty/screens/orders/orders_screen.dart';
 import 'package:marocbeauty/screens/product_details_screen.dart';
@@ -73,6 +74,8 @@ class _MyAppState extends State<MyApp> {
                 const ProductDetailsScreen(),
             OrdersScreen.routeName: (context) => const OrdersScreen(),
             BottomBarScreen.routeName: (context) => const BottomBarScreen(),
+            SignUp.routeName: (context) => const SignUp(),
+            LoginScreen.routeName: (context) => const LoginScreen(),
           },
         );
       }),
