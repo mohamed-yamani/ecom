@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:marocbeauty/consts/constss.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/screens/auth/login.dart';
 import 'package:marocbeauty/screens/auth/sign_up.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:provider/provider.dart';
@@ -153,7 +154,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed(
-                                SignUp.routeName,
+                                LoginScreen.routeName,
                               );
                             },
                             style: ElevatedButton.styleFrom(
