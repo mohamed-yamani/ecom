@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:marocbeauty/consts/constss.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/screens/all_products_widget.dart';
 import 'package:marocbeauty/services/global_methods.dart';
@@ -86,13 +87,15 @@ class HomeScreen extends StatelessWidget {
                     // rtl
                     shrinkWrap: true,
                     // physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 22,
+                    itemCount: Constss.productsList.length,
                     itemBuilder: (context, index) {
                       return ProductContainerWidget(
                         height: size.height * 0.21,
                         width: size.height * 0.193,
                         imgHeight: size.height * 0.16,
                         imgWidth: size.height * 0.16,
+                        img: Constss.productsList[index].imageUrl,
+                        title: Constss.productsList[index].title,
                       );
                     },
                   ),
@@ -136,13 +139,15 @@ class HomeScreen extends StatelessWidget {
                     // rtl
                     shrinkWrap: true,
                     // physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 22,
+                    itemCount: Constss.productsList.length,
                     itemBuilder: (context, index) {
                       return ProductContainerWidget(
                         height: size.height * 0.21,
                         width: size.height * 0.193,
                         imgHeight: size.height * 0.16,
                         imgWidth: size.height * 0.16,
+                        img: Constss.productsList[index].imageUrl,
+                        title: Constss.productsList[index].title,
                       );
                       ;
                     },
@@ -188,13 +193,15 @@ class HomeScreen extends StatelessWidget {
                     // rtl
                     shrinkWrap: true,
                     // physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 22,
+                    itemCount: Constss.productsList.length,
                     itemBuilder: (context, index) {
                       return ProductContainerWidget(
                         height: size.height * 0.21,
                         width: size.height * 0.193,
                         imgHeight: size.height * 0.16,
                         imgWidth: size.height * 0.16,
+                        img: Constss.productsList[index].imageUrl,
+                        title: Constss.productsList[index].title,
                       );
                     },
                   ),

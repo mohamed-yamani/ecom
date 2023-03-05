@@ -11,12 +11,14 @@ class ProductContainerWidget extends StatefulWidget {
   double width;
   double imgHeight;
   double imgWidth;
+
   ProductContainerWidget(
       {super.key,
       required this.height,
       required this.width,
       required this.imgHeight,
-      required this.imgWidth});
+      required this.imgWidth,
+    });
 
   @override
   State<ProductContainerWidget> createState() => _ProductContainerWidgetState();
@@ -50,9 +52,7 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: FancyShimmerImage(
-                        imageUrl:
-                            'https://cdn.youcan.shop/stores/c749137d893cf429107e4a8c5fd443b6/products/bFyGtp4QUP8hQqPaFEIy8JWcw0BQkuKPEaf8BYWC_lg.png',
-                        boxFit: BoxFit.fill,
+                        imageUrl: widget.img,
                         // height: size.height * 0.16,
                         // width: size.height * 0.16,
                         height: widget.imgHeight,
@@ -92,12 +92,14 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
                           color: Colors.black.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 5),
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
                             child: Text(
-                              'cc cream',
-                              style: TextStyle(
+                              widget.title.length > 21
+                                  ? "${widget.title.substring(0, 21)}..."
+                                  : widget.title,
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600,

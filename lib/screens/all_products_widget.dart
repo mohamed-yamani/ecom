@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marocbeauty/consts/constss.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:marocbeauty/widgets/products_container_widget.dart';
@@ -25,9 +26,11 @@ class AllProductsWidget extends StatelessWidget {
                   width: size.height * 0.10,
                   imgHeight: size.height * 0.14,
                   imgWidth: size.height * 0.14,
+                  img: Constss.productsList[index].imageUrl,
+                  title: Constss.productsList[index].title,
                 );
               },
-              childCount: 16,
+              childCount: Constss.productsList.length,
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
