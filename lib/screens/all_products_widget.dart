@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marocbeauty/consts/constss.dart';
+import 'package:marocbeauty/models/products_model.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/providers/products_provider.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:marocbeauty/widgets/products_container_widget.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +16,9 @@ class AllProductsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
     Size size = Utils(context).getScreenSize;
+
+    final productProvider = Provider.of<ProductsProvider>(context);
+    List<ProductModel> allProducts = productProvider.getProducts;
     return Scaffold(
       body: Stack(
         children: [
@@ -21,16 +26,17 @@ class AllProductsWidget extends StatelessWidget {
             shrinkWrap: true,
             childrenDelegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return ProductContainerWidget(
-                  height: size.height * 0.10,
-                  width: size.height * 0.10,
-                  imgHeight: size.height * 0.14,
-                  imgWidth: size.height * 0.14,
-                  img: Constss.productsList[index].imageUrl,
-                  title: Constss.productsList[index].title,
+                return ChangeNotifierProvider.value(
+                  value: allProducts[index],
+                  child: ProductContainerWidget(
+                    height: size.height * 0.10,
+                    width: size.height * 0.10,
+                    imgHeight: size.height * 0.14,
+                    imgWidth: size.height * 0.14,
+                  ),
                 );
               },
-              childCount: Constss.productsList.length,
+              childCount: allProducts.length,
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,

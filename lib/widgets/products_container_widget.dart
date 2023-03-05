@@ -1,10 +1,13 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marocbeauty/models/products_model.dart';
+import 'package:marocbeauty/providers/products_provider.dart';
 import 'package:marocbeauty/screens/product_details_screen.dart';
 import 'package:marocbeauty/services/global_methods.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:marocbeauty/widgets/price_widget.dart';
+import 'package:provider/provider.dart';
 
 class ProductContainerWidget extends StatefulWidget {
   double height;
@@ -12,13 +15,13 @@ class ProductContainerWidget extends StatefulWidget {
   double imgHeight;
   double imgWidth;
 
-  ProductContainerWidget(
-      {super.key,
-      required this.height,
-      required this.width,
-      required this.imgHeight,
-      required this.imgWidth,
-    });
+  ProductContainerWidget({
+    super.key,
+    required this.height,
+    required this.width,
+    required this.imgHeight,
+    required this.imgWidth,
+  });
 
   @override
   State<ProductContainerWidget> createState() => _ProductContainerWidgetState();
@@ -30,6 +33,9 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
     final theme = Utils(context).getTheme;
     Size size = Utils(context).getScreenSize;
     GlobalMethods globalMethods = GlobalMethods();
+
+    final productModel = Provider.of<ProductModel>(context);
+
     return Container(
       height: widget.height,
       width: widget.width,
@@ -52,7 +58,7 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: FancyShimmerImage(
-                        imageUrl: widget.img,
+                        imageUrl: productModel.imageUrl,
                         // height: size.height * 0.16,
                         // width: size.height * 0.16,
                         height: widget.imgHeight,
@@ -70,9 +76,9 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
                           color: Colors.red,
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            '25%-',
+                            'تخفيض ${calculatePourcentage(productModel.price, productModel.SalePrice)}%',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 12,
@@ -96,9 +102,9 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 5),
                             child: Text(
-                              widget.title.length > 21
-                                  ? "${widget.title.substring(0, 21)}..."
-                                  : widget.title,
+                              productModel.title.length > 21
+                                  ? "${productModel.title.substring(0, 21)}..."
+                                  : productModel.title,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 10,
@@ -114,8 +120,8 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
               ],
             ),
             PriceWidget(
-              price: 200.0,
-              oldPrice: 250.0,
+              price: productModel.SalePrice,
+              oldPrice: productModel.price,
               width: widget.imgWidth,
             ),
             // add to cart
@@ -150,4 +156,8 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
       ),
     );
   }
+}
+
+int calculatePourcentage(double price, double salePrice) {
+  return ((price - salePrice) / price * 100).round();
 }
