@@ -6,14 +6,18 @@ class ProductsProvider with ChangeNotifier {
     return productsList;
   }
 
+  List<ProductModel> get getOnSaleProducts {
+    return productsList.where((element) => element.isOnSale).toList();
+  }
+
   static final List<ProductModel> productsList = [
     ProductModel(
         id: "1",
         title: "منتج 1",
         imageUrl:
             "https://img.freepik.com/vecteurs-libre/conception-couronne-cosmetique-recourbe-cils-eye-liner-pinceau_83728-1850.jpg?w=2000",
-        price: 100,
-        isOnSale: true,
+        price: 10,
+        isOnSale: false,
         isPiece: true,
         productCategoryName: "منتجات العناية بالبشرة",
         SalePrice: 50),
@@ -61,10 +65,10 @@ class ProductsProvider with ChangeNotifier {
         title: "منتج 6",
         imageUrl:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBEg1TFhqcaj2qERw0tXHaq4VKMJYPcOwp-A&usqp=CAU",
-        price: 100,
-        isOnSale: true,
+        price: 199,
+        isOnSale: false,
         isPiece: true,
         productCategoryName: "منتجات العناية بالبشرة",
-        SalePrice: 50),
+        SalePrice: 199),
   ];
 }
