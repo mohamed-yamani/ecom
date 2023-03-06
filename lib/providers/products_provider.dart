@@ -13,10 +13,18 @@ class ProductsProvider with ChangeNotifier {
   }
 
   List<ProductModel> getProductByCategory(String category) {
-    if (category.toLowerCase().contains("all")) return productsList;
-    return productsList
-        .where((element) => element.price > element.SalePrice)
-        .toList();
+    if (category.toLowerCase().contains("all")) {
+      return productsList;
+    } else if (category.toLowerCase().contains("onsale")) {
+      return productsList
+          .where((element) => element.price > element.SalePrice)
+          .toList();
+    } else {
+      return productsList
+          .where((element) =>
+              element.productCategoryId.toLowerCase().contains(category))
+          .toList();
+    }
   }
 
   ProductModel findProductById(String productId) {
@@ -35,6 +43,7 @@ class ProductsProvider with ChangeNotifier {
   static final List<ProductModel> productsList = [
     ProductModel(
         id: "1",
+        productCategoryId: "1",
         title: "منتج 1",
         imageUrl:
             "https://img.freepik.com/vecteurs-libre/conception-couronne-cosmetique-recourbe-cils-eye-liner-pinceau_83728-1850.jpg?w=2000",
@@ -55,6 +64,7 @@ class ProductsProvider with ChangeNotifier {
 بعد وضع المكياج، استخدمي البودرة، ثم استخدمي بخاخ تثبيت المكياج ورشي المكياج برفق. هذا المكياج يمكن أن يحقق تأثيراً يدوم طويلاً.'''),
     ProductModel(
         id: "2",
+        productCategoryId: "2",
         title: "منتج 2",
         imageUrl:
             "https://res.cloudinary.com/hamstech/images/f_auto,q_auto/v1646637942/Hamstech%20App/Title-Image-3_80466666986a5/Title-Image-3_80466666986a5.jpg?_i=AA",
@@ -75,6 +85,7 @@ class ProductsProvider with ChangeNotifier {
 بعد وضع المكياج، استخدمي البودرة، ثم استخدمي بخاخ تثبيت المكياج ورشي المكياج برفق. هذا المكياج يمكن أن يحقق تأثيراً يدوم طويلاً.'''),
     ProductModel(
         id: "3",
+        productCategoryId: "1",
         title: "منتجات العناية العناية العناية بالبشرة",
         imageUrl: "https://m.timesofindia.com/photo/95103361/95103361.jpg",
         price: 100,
@@ -94,6 +105,7 @@ class ProductsProvider with ChangeNotifier {
 بعد وضع المكياج، استخدمي البودرة، ثم استخدمي بخاخ تثبيت المكياج ورشي المكياج برفق. هذا المكياج يمكن أن يحقق تأثيراً يدوم طويلاً.'''),
     ProductModel(
         id: "4",
+        productCategoryId: "1",
         title: "منتج 4",
         imageUrl:
             "https://i0.wp.com/post.healthline.com/wp-content/uploads/2022/02/makeup-overhead-1296-728-header.jpg?w=1155&h=1528",
@@ -114,6 +126,7 @@ class ProductsProvider with ChangeNotifier {
 بعد وضع المكياج، استخدمي البودرة، ثم استخدمي بخاخ تثبيت المكياج ورشي المكياج برفق. هذا المكياج يمكن أن يحقق تأثيراً يدوم طويلاً.'''),
     ProductModel(
         id: "5",
+        productCategoryId: "1",
         title: "منتج 5",
         imageUrl:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdtB-sxFziWYs5Fik53a8KFZQ426ckXyBhXw&usqp=CAU",
@@ -134,6 +147,7 @@ class ProductsProvider with ChangeNotifier {
 بعد وضع المكياج، استخدمي البودرة، ثم استخدمي بخاخ تثبيت المكياج ورشي المكياج برفق. هذا المكياج يمكن أن يحقق تأثيراً يدوم طويلاً.'''),
     ProductModel(
         id: "6",
+        productCategoryId: "2",
         title: "منتج 6",
         imageUrl:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBEg1TFhqcaj2qERw0tXHaq4VKMJYPcOwp-A&usqp=CAU",
