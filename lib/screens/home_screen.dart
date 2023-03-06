@@ -28,6 +28,7 @@ class HomeScreen extends StatelessWidget {
 
     final productProvider = Provider.of<ProductsProvider>(context);
     List<ProductModel> allProducts = productProvider.getProducts;
+    List<ProductModel> allOnSaleProducts = productProvider.getOnSaleProducts;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -92,10 +93,10 @@ class HomeScreen extends StatelessWidget {
                     // rtl
                     shrinkWrap: true,
                     // physics: const NeverScrollableScrollPhysics(),
-                    itemCount: allProducts.length,
+                    itemCount: allOnSaleProducts.length,
                     itemBuilder: (context, index) {
                       return ChangeNotifierProvider.value(
-                        value: allProducts[index],
+                        value: allOnSaleProducts[index],
                         child: ProductContainerWidget(
                           height: size.height * 0.21,
                           width: size.height * 0.193,

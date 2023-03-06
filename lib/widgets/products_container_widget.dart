@@ -41,8 +41,10 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
       width: widget.width,
       child: InkWell(
         onTap: () {
-          globalMethods.navigateToPage(
-              context: context, page: ProductDetailsScreen.routeName);
+          Navigator.pushNamed(context, ProductDetailsScreen.routeName,
+              arguments: productModel.id);
+          // globalMethods.navigateToPage(
+          //     context: context, page: ProductDetailsScreen.routeName);
         },
         borderRadius: BorderRadius.circular(10),
         child: Column(
@@ -77,15 +79,18 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Center(
-                          child: Text(
-                            'تخفيض ${calculatePourcentage(productModel.price, productModel.SalePrice)}%',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
+                            child: calculatePourcentage(productModel.price,
+                                        productModel.SalePrice) >
+                                    0
+                                ? Text(
+                                    'تخفيض ${calculatePourcentage(productModel.price, productModel.SalePrice)}%',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  )
+                                : const SizedBox.shrink()),
                       ),
                     ),
                     Positioned(
