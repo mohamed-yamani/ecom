@@ -68,9 +68,12 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextButton(
                         onPressed: () {
-                          globalMethods.navigateToPage(
-                              context: context,
-                              page: AllProductsWidget.routeName);
+                          // globalMethods.navigateToPage(
+                          //     context: context,
+                          //     page: AllProductsWidget.routeName);
+                          Navigator.of(context).pushNamed(
+                              AllProductsWidget.routeName,
+                              arguments: "OnSale");
                         },
                         child: Text(
                           "عرض الكل",
@@ -121,9 +124,12 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextButton(
                         onPressed: () {
-                          globalMethods.navigateToPage(
-                              context: context,
-                              page: AllProductsWidget.routeName);
+                          // globalMethods.navigateToPage(
+                          //     context: context,
+                          //     page: AllProductsWidget.routeName);
+                          Navigator.of(context).pushNamed(
+                              AllProductsWidget.routeName,
+                              arguments: "all");
                         },
                         child: Text(
                           "عرض الكل",
@@ -175,9 +181,12 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextButton(
                         onPressed: () {
-                          globalMethods.navigateToPage(
-                              context: context,
-                              page: AllProductsWidget.routeName);
+                          // globalMethods.navigateToPage(
+                          //     context: context,
+                          //     page: AllProductsWidget.routeName);
+                          Navigator.of(context).pushNamed(
+                              AllProductsWidget.routeName,
+                              arguments: "all");
                         },
                         child: Text(
                           "عرض الكل",

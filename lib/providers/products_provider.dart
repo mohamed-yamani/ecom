@@ -7,11 +7,29 @@ class ProductsProvider with ChangeNotifier {
   }
 
   List<ProductModel> get getOnSaleProducts {
-    return productsList.where((element) => element.isOnSale).toList();
+    return productsList
+        .where((element) => element.price > element.SalePrice)
+        .toList();
+  }
+
+  List<ProductModel> getProductByCategory(String category) {
+    if (category.toLowerCase().contains("all")) return productsList;
+    return productsList
+        .where((element) => element.price > element.SalePrice)
+        .toList();
   }
 
   ProductModel findProductById(String productId) {
     return productsList.firstWhere((element) => element.id == productId);
+  }
+
+  List<ProductModel> findByIdCategory(String categoryName) {
+    List<ProductModel> _categoryList = productsList
+        .where((element) => element.productCategoryName
+            .toLowerCase()
+            .contains(categoryName.toLowerCase()))
+        .toList();
+    return _categoryList;
   }
 
   static final List<ProductModel> productsList = [
