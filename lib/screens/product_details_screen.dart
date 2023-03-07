@@ -2,6 +2,7 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/providers/cart_provider.dart';
 import 'package:marocbeauty/providers/products_provider.dart';
 import 'package:marocbeauty/services/global_methods.dart';
 import 'package:marocbeauty/services/utils.dart';
@@ -25,6 +26,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     GlobalMethods globalMethods = GlobalMethods();
     final productId = ModalRoute.of(context)!.settings.arguments as String;
     final getCurrentProduct = productProviders.findProductById(productId);
+    final cartProvider = Provider.of<CartProvider>(context);
+    bool isInCart = cartProvider.getCartItems.containsKey(productId);
+
     return Scaffold(
       body: Stack(
         children: [
@@ -134,7 +138,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        cartProvider.addProductToCart(
+                            productId: productId, quantity: 1);
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: themeState.getDarkTheme
                             ? Colors.white
@@ -146,16 +153,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.end,
-                        children: const [
+                        children: [
                           Text(
-                            'أضف إلى السلة',
-                            style: TextStyle(
+                            isInCart ? 'في السلة' : 'أضف للسلة',
+                            style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(width: 10),
-                          Icon(
+                          const SizedBox(width: 10),
+                          const Icon(
                             CupertinoIcons.cart_badge_plus,
                             size: 25,
                             color: Color.fromARGB(255, 252, 8, 195),

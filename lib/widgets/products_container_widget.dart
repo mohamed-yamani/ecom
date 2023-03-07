@@ -38,6 +38,8 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
     final productModel = Provider.of<ProductModel>(context);
     final cartProvider = Provider.of<CartProvider>(context);
 
+    bool isInCart = cartProvider.getCartItems.containsKey(productModel.id);
+
     return Container(
       height: widget.height,
       width: widget.width,
@@ -136,27 +138,31 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
               height: 27,
               width: widget.imgWidth,
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withOpacity(0.6),
+                color: isInCart
+                    ? Colors.grey[400]
+                    : Theme.of(context).primaryColor.withOpacity(0.6),
                 borderRadius: BorderRadius.circular(5),
               ),
               child: InkWell(
                 onTap: () {
-                  cartProvider.addProductToCart(
-                      productId: productModel.id, quantity: 1);
+                  if (!isInCart) {
+                    cartProvider.addProductToCart(
+                        productId: productModel.id, quantity: 1);
+                  }
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  children: [
                     Text(
-                      'أضف للسلة',
-                      style: TextStyle(
+                      isInCart ? 'في السلة' : 'أضف للسلة',
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    Icon(
+                    const Icon(
                       CupertinoIcons.cart,
                       color: Colors.white,
                     ),

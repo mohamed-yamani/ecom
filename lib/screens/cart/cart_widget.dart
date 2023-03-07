@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:marocbeauty/models/cart_model.dart';
 import 'package:marocbeauty/models/products_model.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/providers/cart_provider.dart';
 import 'package:marocbeauty/providers/products_provider.dart';
 import 'package:marocbeauty/services/global_methods.dart';
 import 'package:marocbeauty/services/utils.dart';
@@ -24,6 +25,8 @@ class _CartWidgetState extends State<CartWidget> {
     final cartModel = Provider.of<CartModel>(context);
     Size size = Utils(context).getScreenSize;
     GlobalMethods globalMethods = GlobalMethods();
+
+    final cartProvider = Provider.of<CartProvider>(context);
 
     final productsProvider = Provider.of<ProductsProvider>(context);
     final getProduct = productsProvider.findProductById(cartModel.productId);
@@ -106,16 +109,14 @@ class _CartWidgetState extends State<CartWidget> {
                       children: [
                         InkWell(
                           onTap: () => {
-                            total--,
-                            setState(() {
-                              total > 0 ? total : total = 1;
-                            }),
+                            cartProvider
+                                .reduceQuantityByOne(cartModel.productId)
                           },
                           child: Container(
                             height: 30,
                             width: 30,
                             decoration: BoxDecoration(
-                              color: total > 1
+                              color: cartModel.quantity > 1
                                   ? const Color.fromARGB(255, 251, 90, 208)
                                   : Colors.grey,
                               borderRadius: BorderRadius.circular(5),
@@ -132,7 +133,7 @@ class _CartWidgetState extends State<CartWidget> {
                           width: 10,
                         ),
                         Text(
-                          total.toString(),
+                          cartModel.quantity.toString(),
                           style: TextStyle(
                             color: themeState.getDarkTheme
                                 ? Colors.white
@@ -146,9 +147,11 @@ class _CartWidgetState extends State<CartWidget> {
                         ),
                         InkWell(
                           onTap: () => {
-                            setState(() {
-                              total++;
-                            }),
+                            // setState(() {
+                            //   total++;
+                            // }),
+                            cartProvider
+                                .increaseQuantityByOne(cartModel.productId)
                           },
                           child: Container(
                             height: 30,
@@ -179,7 +182,10 @@ class _CartWidgetState extends State<CartWidget> {
                           context: context,
                           title: "حذف المنتج",
                           subtitle: "هل تريد حذف المنتج من السلة؟",
-                          function: () => {}),
+                          function: () => {
+                                cartProvider
+                                    .removeItemFromCart(cartModel.productId)
+                              }),
                     },
                     child: const SizedBox(
                       height: 30,

@@ -15,7 +15,8 @@ class CartScreen extends StatelessWidget {
     final themeState = Provider.of<DarkThemeProvider>(context);
     Size size = Utils(context).getScreenSize;
     final cartProvider = Provider.of<CartProvider>(context);
-    final cartItemsList = cartProvider.getCartItems.values.toList();
+    final cartItemsList =
+        cartProvider.getCartItems.values.toList().reversed.toList();
 
     return Scaffold(
       body: cartItemsList.isEmpty
