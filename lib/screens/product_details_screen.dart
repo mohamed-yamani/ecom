@@ -2,6 +2,8 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/providers/cart_provider.dart';
+import 'package:marocbeauty/providers/products_provider.dart';
 import 'package:marocbeauty/services/global_methods.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:marocbeauty/widgets/title_widget.dart';
@@ -18,9 +20,15 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    final productProviders = Provider.of<ProductsProvider>(context);
     final themeState = Provider.of<DarkThemeProvider>(context);
     Size size = Utils(context).getScreenSize;
     GlobalMethods globalMethods = GlobalMethods();
+    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final getCurrentProduct = productProviders.findProductById(productId);
+    final cartProvider = Provider.of<CartProvider>(context);
+    bool isInCart = cartProvider.getCartItems.containsKey(productId);
+
     return Scaffold(
       body: Stack(
         children: [
@@ -29,8 +37,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: FancyShimmerImage(
-                  imageUrl:
-                      'https://cdn.youcan.shop/stores/c749137d893cf429107e4a8c5fd443b6/products/bFyGtp4QUP8hQqPaFEIy8JWcw0BQkuKPEaf8BYWC_lg.png',
+                  imageUrl: getCurrentProduct.imageUrl,
                   boxFit: BoxFit.fill,
                   height: size.width,
                   width: size.width,
@@ -47,33 +54,56 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // const SizedBox(height: 10),
-                        TitleWidget(title: 'كريم أساس خافي للعيوب'),
-                        Text(
-                          '199 درهم',
-                          style: themeState.getDarkTheme
-                              ? const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold)
-                              : const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                        ),
+                        Flexible(
+                            child: TitleWidget(title: getCurrentProduct.title)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          // crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            if (getCurrentProduct.price >
+                                getCurrentProduct.SalePrice)
+                              Text(
+                                getCurrentProduct.price.toStringAsFixed(2),
+                                style: themeState.getDarkTheme
+                                    ? const TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 15,
+                                        decoration: TextDecoration.lineThrough,
+                                        fontWeight: FontWeight.bold)
+                                    : const TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 15,
+                                        decoration: TextDecoration.lineThrough,
+                                        fontWeight: FontWeight.bold),
+                              ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "${getCurrentProduct.SalePrice.toStringAsFixed(2)} درهم",
+                              style: themeState.getDarkTheme
+                                  ? TextStyle(
+                                      color: (getCurrentProduct.price >
+                                              getCurrentProduct.SalePrice)
+                                          ? Theme.of(context).primaryColor
+                                          : Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold)
+                                  : TextStyle(
+                                      color: (getCurrentProduct.price >
+                                              getCurrentProduct.SalePrice)
+                                          ? Theme.of(context).primaryColor
+                                          : Colors.black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      '''صديقة للبشرة وسلسة وتضغط بسهولة وبالتساوي.
-رأس اسفنجي لطيف يصبح أكبر وأنعم وسهل الاستخدام عندما يلتقي بالماء.
-يغطي عيوب البشرة بشكل طبيعي ويخفي المسام ويخلق مكياج مرطب طبيعي.
-ملمس ناعم ورقيق، لا يسد المسام، مما يسمح للبشرة بالتنفس بحرية.
-ما يجب مراعاته قبل المكياج:
-إذا كنتي ترغبين في جعله يبدو جيداً ويدوم طويلاً. قومي بما يلي:
-التزمي بالعناية الأساسية للبشرة.
-يجب تنظيف الرأس الاسفنجي على شكل الفطر قبل الاستخدام.
-ضعي المكياج بطريقة الكبس بسرعة حتى يصبح المكياج أكثر سلاسة.
-بعد وضع المكياج، استخدمي البودرة، ثم استخدمي بخاخ تثبيت المكياج ورشي المكياج برفق. هذا المكياج يمكن أن يحقق تأثيراً يدوم طويلاً.''',
+                      getCurrentProduct.details,
                       style: themeState.getDarkTheme
                           ? const TextStyle(color: Colors.white, fontSize: 15)
                           : const TextStyle(color: Colors.black, fontSize: 15),
@@ -108,7 +138,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        cartProvider.addProductToCart(
+                            productId: productId, quantity: 1);
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: themeState.getDarkTheme
                             ? Colors.white
@@ -120,16 +153,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.end,
-                        children: const [
+                        children: [
                           Text(
-                            'أضف إلى السلة',
-                            style: TextStyle(
+                            isInCart ? 'في السلة' : 'أضف للسلة',
+                            style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(width: 10),
-                          Icon(
+                          const SizedBox(width: 10),
+                          const Icon(
                             CupertinoIcons.cart_badge_plus,
                             size: 25,
                             color: Color.fromARGB(255, 252, 8, 195),

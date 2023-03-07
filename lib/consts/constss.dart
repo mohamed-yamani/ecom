@@ -1,3 +1,5 @@
+import 'package:marocbeauty/models/products_model.dart';
+
 class Constss {
   static final List<String> authImagesPath = [
     'assets/images/loginswiper1.jpeg',
@@ -8,4 +10,5 @@ class Constss {
     'assets/images/category3.png',
     'assets/images/category1.png',
   ];
+
 }

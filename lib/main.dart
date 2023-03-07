@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:marocbeauty/consts/theme_data.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/providers/cart_provider.dart';
+import 'package:marocbeauty/providers/products_provider.dart';
 import 'package:marocbeauty/screens/all_products_widget.dart';
 import 'package:marocbeauty/screens/auth/forget_password.dart';
 import 'package:marocbeauty/screens/auth/login.dart';
@@ -48,6 +50,12 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) {
           return themeChangeProvider;
+        }),
+        ChangeNotifierProvider(create: (_) {
+          return ProductsProvider();
+        }),
+        ChangeNotifierProvider(create: (_) {
+          return CartProvider();
         })
       ],
       child:
@@ -66,8 +74,8 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: Styles.themeData(themeProvider.getDarkTheme, context),
-          // home: const BottomBarScreen(),
-          home: const LoginScreen(),
+          home: const BottomBarScreen(),
+          // home: const LoginScreen(),
           routes: {
             // HomeScreen.routeName: (context) => const HomeScreen(),
             AllProductsWidget.routeName: (context) => const AllProductsWidget(),

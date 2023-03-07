@@ -1,6 +1,9 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:marocbeauty/consts/constss.dart';
+import 'package:marocbeauty/models/products_model.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/providers/products_provider.dart';
 import 'package:marocbeauty/screens/all_products_widget.dart';
 import 'package:marocbeauty/services/global_methods.dart';
 import 'package:marocbeauty/services/utils.dart';
@@ -22,6 +25,10 @@ class HomeScreen extends StatelessWidget {
     final themeState = Provider.of<DarkThemeProvider>(context);
     Size size = Utils(context).getScreenSize;
     GlobalMethods globalMethods = GlobalMethods();
+
+    final productProvider = Provider.of<ProductsProvider>(context);
+    List<ProductModel> allProducts = productProvider.getProducts;
+    List<ProductModel> allOnSaleProducts = productProvider.getOnSaleProducts;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -61,9 +68,12 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextButton(
                         onPressed: () {
-                          globalMethods.navigateToPage(
-                              context: context,
-                              page: AllProductsWidget.routeName);
+                          // globalMethods.navigateToPage(
+                          //     context: context,
+                          //     page: AllProductsWidget.routeName);
+                          Navigator.of(context).pushNamed(
+                              AllProductsWidget.routeName,
+                              arguments: "OnSale");
                         },
                         child: Text(
                           "عرض الكل",
@@ -86,13 +96,16 @@ class HomeScreen extends StatelessWidget {
                     // rtl
                     shrinkWrap: true,
                     // physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 22,
+                    itemCount: allOnSaleProducts.length,
                     itemBuilder: (context, index) {
-                      return ProductContainerWidget(
-                        height: size.height * 0.21,
-                        width: size.height * 0.193,
-                        imgHeight: size.height * 0.16,
-                        imgWidth: size.height * 0.16,
+                      return ChangeNotifierProvider.value(
+                        value: allOnSaleProducts[index],
+                        child: ProductContainerWidget(
+                          height: size.height * 0.21,
+                          width: size.height * 0.193,
+                          imgHeight: size.height * 0.16,
+                          imgWidth: size.height * 0.16,
+                        ),
                       );
                     },
                   ),
@@ -111,9 +124,12 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextButton(
                         onPressed: () {
-                          globalMethods.navigateToPage(
-                              context: context,
-                              page: AllProductsWidget.routeName);
+                          // globalMethods.navigateToPage(
+                          //     context: context,
+                          //     page: AllProductsWidget.routeName);
+                          Navigator.of(context).pushNamed(
+                              AllProductsWidget.routeName,
+                              arguments: "all");
                         },
                         child: Text(
                           "عرض الكل",
@@ -136,15 +152,17 @@ class HomeScreen extends StatelessWidget {
                     // rtl
                     shrinkWrap: true,
                     // physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 22,
+                    itemCount: allProducts.length,
                     itemBuilder: (context, index) {
-                      return ProductContainerWidget(
-                        height: size.height * 0.21,
-                        width: size.height * 0.193,
-                        imgHeight: size.height * 0.16,
-                        imgWidth: size.height * 0.16,
+                      return ChangeNotifierProvider.value(
+                        value: allProducts[index],
+                        child: ProductContainerWidget(
+                          height: size.height * 0.21,
+                          width: size.height * 0.193,
+                          imgHeight: size.height * 0.16,
+                          imgWidth: size.height * 0.16,
+                        ),
                       );
-                      ;
                     },
                   ),
                 ),
@@ -163,9 +181,12 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextButton(
                         onPressed: () {
-                          globalMethods.navigateToPage(
-                              context: context,
-                              page: AllProductsWidget.routeName);
+                          // globalMethods.navigateToPage(
+                          //     context: context,
+                          //     page: AllProductsWidget.routeName);
+                          Navigator.of(context).pushNamed(
+                              AllProductsWidget.routeName,
+                              arguments: "all");
                         },
                         child: Text(
                           "عرض الكل",
@@ -188,13 +209,16 @@ class HomeScreen extends StatelessWidget {
                     // rtl
                     shrinkWrap: true,
                     // physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 22,
+                    itemCount: allProducts.length,
                     itemBuilder: (context, index) {
-                      return ProductContainerWidget(
-                        height: size.height * 0.21,
-                        width: size.height * 0.193,
-                        imgHeight: size.height * 0.16,
-                        imgWidth: size.height * 0.16,
+                      return ChangeNotifierProvider.value(
+                        value: allProducts[index],
+                        child: ProductContainerWidget(
+                          height: size.height * 0.21,
+                          width: size.height * 0.193,
+                          imgHeight: size.height * 0.16,
+                          imgWidth: size.height * 0.16,
+                        ),
                       );
                     },
                   ),

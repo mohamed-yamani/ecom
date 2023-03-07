@@ -1,22 +1,28 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marocbeauty/models/products_model.dart';
+import 'package:marocbeauty/providers/cart_provider.dart';
+import 'package:marocbeauty/providers/products_provider.dart';
 import 'package:marocbeauty/screens/product_details_screen.dart';
 import 'package:marocbeauty/services/global_methods.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:marocbeauty/widgets/price_widget.dart';
+import 'package:provider/provider.dart';
 
 class ProductContainerWidget extends StatefulWidget {
   double height;
   double width;
   double imgHeight;
   double imgWidth;
-  ProductContainerWidget(
-      {super.key,
-      required this.height,
-      required this.width,
-      required this.imgHeight,
-      required this.imgWidth});
+
+  ProductContainerWidget({
+    super.key,
+    required this.height,
+    required this.width,
+    required this.imgHeight,
+    required this.imgWidth,
+  });
 
   @override
   State<ProductContainerWidget> createState() => _ProductContainerWidgetState();
@@ -28,13 +34,21 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
     final theme = Utils(context).getTheme;
     Size size = Utils(context).getScreenSize;
     GlobalMethods globalMethods = GlobalMethods();
+
+    final productModel = Provider.of<ProductModel>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
+
+    bool isInCart = cartProvider.getCartItems.containsKey(productModel.id);
+
     return Container(
       height: widget.height,
       width: widget.width,
       child: InkWell(
         onTap: () {
-          globalMethods.navigateToPage(
-              context: context, page: ProductDetailsScreen.routeName);
+          Navigator.pushNamed(context, ProductDetailsScreen.routeName,
+              arguments: productModel.id);
+          // globalMethods.navigateToPage(
+          //     context: context, page: ProductDetailsScreen.routeName);
         },
         borderRadius: BorderRadius.circular(10),
         child: Column(
@@ -50,9 +64,7 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: FancyShimmerImage(
-                        imageUrl:
-                            'https://cdn.youcan.shop/stores/c749137d893cf429107e4a8c5fd443b6/products/bFyGtp4QUP8hQqPaFEIy8JWcw0BQkuKPEaf8BYWC_lg.png',
-                        boxFit: BoxFit.fill,
+                        imageUrl: productModel.imageUrl,
                         // height: size.height * 0.16,
                         // width: size.height * 0.16,
                         height: widget.imgHeight,
@@ -70,16 +82,19 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
                           color: Colors.red,
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: const Center(
-                          child: Text(
-                            '25%-',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
+                        child: Center(
+                            child: calculatePourcentage(productModel.price,
+                                        productModel.SalePrice) >
+                                    0
+                                ? Text(
+                                    'تخفيض ${calculatePourcentage(productModel.price, productModel.SalePrice)}%',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  )
+                                : const SizedBox.shrink()),
                       ),
                     ),
                     Positioned(
@@ -92,12 +107,14 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
                           color: Colors.black.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 5),
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
                             child: Text(
-                              'cc cream',
-                              style: TextStyle(
+                              productModel.title.length > 21
+                                  ? "${productModel.title.substring(0, 21)}..."
+                                  : productModel.title,
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600,
@@ -112,8 +129,8 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
               ],
             ),
             PriceWidget(
-              price: 200.0,
-              oldPrice: 250.0,
+              price: productModel.SalePrice,
+              oldPrice: productModel.price,
               width: widget.imgWidth,
             ),
             // add to cart
@@ -121,26 +138,36 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
               height: 27,
               width: widget.imgWidth,
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withOpacity(0.6),
+                color: isInCart
+                    ? Colors.grey[400]
+                    : Theme.of(context).primaryColor.withOpacity(0.6),
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  Text(
-                    'أضف للسلة',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
+              child: InkWell(
+                onTap: () {
+                  if (!isInCart) {
+                    cartProvider.addProductToCart(
+                        productId: productModel.id, quantity: 1);
+                  }
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      isInCart ? 'في السلة' : 'أضف للسلة',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Icon(
-                    CupertinoIcons.cart,
-                    color: Colors.white,
-                  ),
-                ],
+                    const Icon(
+                      CupertinoIcons.cart,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -148,4 +175,8 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
       ),
     );
   }
+}
+
+int calculatePourcentage(double price, double salePrice) {
+  return ((price - salePrice) / price * 100).round();
 }

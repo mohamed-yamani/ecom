@@ -11,12 +11,15 @@ import 'package:marocbeauty/services/global_methods.dart';
 class CategoriesWidget extends StatelessWidget {
   final String categoryImage;
   final String categoryName;
+  final int categoryId;
   final Color color;
-  const CategoriesWidget(
-      {super.key,
-      required this.categoryImage,
-      required this.categoryName,
-      required this.color});
+  const CategoriesWidget({
+    super.key,
+    required this.categoryImage,
+    required this.categoryName,
+    required this.color,
+    required this.categoryId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +30,10 @@ class CategoriesWidget extends StatelessWidget {
       child: InkWell(
         onTap: () {
           print('Category Clicked');
-          globalMethods.navigateToPage(
-              context: context, page: AllProductsWidget.routeName);
+          // globalMethods.navigateToPage(
+          //     context: context, page: AllProductsWidget.routeName);
+          Navigator.of(context).pushNamed(AllProductsWidget.routeName,
+              arguments: categoryId.toString());
         },
         child: Column(
           children: [
