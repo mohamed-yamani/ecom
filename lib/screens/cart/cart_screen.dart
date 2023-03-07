@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:marocbeauty/models/products_model.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/providers/cart_provider.dart';
 import 'package:marocbeauty/screens/cart/cart_widget.dart';
 import 'package:marocbeauty/screens/empty_screen.dart';
 import 'package:marocbeauty/services/utils.dart';
@@ -12,16 +14,19 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
     Size size = Utils(context).getScreenSize;
-    bool _isEmpty = false;
+    final cartProvider = Provider.of<CartProvider>(context);
+    final cartItemsList = cartProvider.getCartItems.values.toList();
+
     return Scaffold(
-      body: _isEmpty
+      body: cartItemsList.isEmpty
           ? EmptyScreen(icon: Icons.shopping_cart, title: 'السلة فارغة')
           : Stack(
               children: [
                 ListView.builder(
                   padding: const EdgeInsets.all(8),
-                  itemCount: 15,
-                  itemBuilder: (context, index) => const CartWidget(),
+                  itemCount: cartItemsList.length,
+                  itemBuilder: (context, index) => ChangeNotifierProvider.value(
+                      value: cartItemsList[index], child: const CartWidget()),
                 ),
                 CheckOutWidget(size: size, themeState: themeState),
               ],

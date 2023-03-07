@@ -1,7 +1,10 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marocbeauty/models/cart_model.dart';
+import 'package:marocbeauty/models/products_model.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/providers/products_provider.dart';
 import 'package:marocbeauty/services/global_methods.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:provider/provider.dart';
@@ -18,8 +21,12 @@ class _CartWidgetState extends State<CartWidget> {
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
+    final cartModel = Provider.of<CartModel>(context);
     Size size = Utils(context).getScreenSize;
     GlobalMethods globalMethods = GlobalMethods();
+
+    final productsProvider = Provider.of<ProductsProvider>(context);
+    final getProduct = productsProvider.findProductById(cartModel.productId);
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: InkWell(
@@ -38,8 +45,7 @@ class _CartWidgetState extends State<CartWidget> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: FancyShimmerImage(
-                        imageUrl:
-                            'https://cdn.youcan.shop/stores/c749137d893cf429107e4a8c5fd443b6/products/bFyGtp4QUP8hQqPaFEIy8JWcw0BQkuKPEaf8BYWC_lg.png',
+                        imageUrl: getProduct.imageUrl,
                         boxFit: BoxFit.fill,
                         height: size.height * 0.10,
                         width: size.height * 0.10,
@@ -55,7 +61,7 @@ class _CartWidgetState extends State<CartWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'اسم المنتج',
+                          getProduct.title,
                           style: TextStyle(
                             color: themeState.getDarkTheme
                                 ? Colors.white
@@ -79,7 +85,7 @@ class _CartWidgetState extends State<CartWidget> {
                           height: 5,
                         ),
                         Text(
-                          '199 درهم',
+                          getProduct.SalePrice.toStringAsFixed(2),
                           style: TextStyle(
                             color: themeState.getDarkTheme
                                 ? Colors.grey

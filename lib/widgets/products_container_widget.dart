@@ -2,6 +2,7 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marocbeauty/models/products_model.dart';
+import 'package:marocbeauty/providers/cart_provider.dart';
 import 'package:marocbeauty/providers/products_provider.dart';
 import 'package:marocbeauty/screens/product_details_screen.dart';
 import 'package:marocbeauty/services/global_methods.dart';
@@ -35,6 +36,7 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
     GlobalMethods globalMethods = GlobalMethods();
 
     final productModel = Provider.of<ProductModel>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
 
     return Container(
       height: widget.height,
@@ -137,23 +139,29 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
                 color: Theme.of(context).primaryColor.withOpacity(0.6),
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  Text(
-                    'أضف للسلة',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
+              child: InkWell(
+                onTap: () {
+                  cartProvider.addProductToCart(
+                      productId: productModel.id, quantity: 1);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Text(
+                      'أضف للسلة',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Icon(
-                    CupertinoIcons.cart,
-                    color: Colors.white,
-                  ),
-                ],
+                    Icon(
+                      CupertinoIcons.cart,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

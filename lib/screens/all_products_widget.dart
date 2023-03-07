@@ -71,6 +71,10 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
                     childAspectRatio: size.width / (size.height * .65),
                   ),
                 ),
+                if (allProducts!.isEmpty)
+                  const Center(
+                    child: Text('القائمة فارغة'),
+                  ),
                 Positioned(
                   top: size.height * 0.05,
                   right: size.width * 0.05,
