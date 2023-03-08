@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -44,51 +45,74 @@ class _MyAppState extends State<MyApp> {
   }
 
   // This widget is the root of your application.
+  final Future<FirebaseApp> _firebaseInitilization = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) {
-          return themeChangeProvider;
-        }),
-        ChangeNotifierProvider(create: (_) {
-          return ProductsProvider();
-        }),
-        ChangeNotifierProvider(create: (_) {
-          return CartProvider();
-        })
-      ],
-      child:
-          Consumer<DarkThemeProvider>(builder: (context, themeProvider, child) {
-        return MaterialApp(
-          localizationsDelegates: const [
-            GlobalCupertinoLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale("fa", "IR"), // OR Locale('ar', 'AE') OR Other RTL locales
-          ],
-          locale: const Locale(
-              "fa", "IR"), // OR Locale('ar', 'AE') OR Other RTL locales,
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: Styles.themeData(themeProvider.getDarkTheme, context),
-          home: const BottomBarScreen(),
-          // home: const LoginScreen(),
-          routes: {
-            // HomeScreen.routeName: (context) => const HomeScreen(),
-            AllProductsWidget.routeName: (context) => const AllProductsWidget(),
-            ProductDetailsScreen.routeName: (context) =>
-                const ProductDetailsScreen(),
-            OrdersScreen.routeName: (context) => const OrdersScreen(),
-            BottomBarScreen.routeName: (context) => const BottomBarScreen(),
-            SignUp.routeName: (context) => const SignUp(),
-            LoginScreen.routeName: (context) => const LoginScreen(),
-            ForgetPassword.routeName: (context) => const ForgetPassword(),
-          },
-        );
-      }),
-    );
+    return FutureBuilder(
+        future: _firebaseInitilization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const MaterialApp(
+              home: Center(
+                child: Text('Error'),
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            return MultiProvider(
+              providers: [
+                ChangeNotifierProvider(create: (_) {
+                  return themeChangeProvider;
+                }),
+                ChangeNotifierProvider(create: (_) {
+                  return ProductsProvider();
+                }),
+                ChangeNotifierProvider(create: (_) {
+                  return CartProvider();
+                })
+              ],
+              child: Consumer<DarkThemeProvider>(
+                  builder: (context, themeProvider, child) {
+                return MaterialApp(
+                  localizationsDelegates: const [
+                    GlobalCupertinoLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                  ],
+                  supportedLocales: const [
+                    Locale("fa",
+                        "IR"), // OR Locale('ar', 'AE') OR Other RTL locales
+                  ],
+                  locale: const Locale("fa",
+                      "IR"), // OR Locale('ar', 'AE') OR Other RTL locales,
+                  debugShowCheckedModeBanner: false,
+                  title: 'Flutter Demo',
+                  theme: Styles.themeData(themeProvider.getDarkTheme, context),
+                  // home: const BottomBarScreen(),
+                  home: const LoginScreen(),
+                  routes: {
+                    // HomeScreen.routeName: (context) => const HomeScreen(),
+                    AllProductsWidget.routeName: (context) =>
+                        const AllProductsWidget(),
+                    ProductDetailsScreen.routeName: (context) =>
+                        const ProductDetailsScreen(),
+                    OrdersScreen.routeName: (context) => const OrdersScreen(),
+                    BottomBarScreen.routeName: (context) =>
+                        const BottomBarScreen(),
+                    SignUp.routeName: (context) => const SignUp(),
+                    LoginScreen.routeName: (context) => const LoginScreen(),
+                    ForgetPassword.routeName: (context) =>
+                        const ForgetPassword(),
+                  },
+                );
+              }),
+            );
+          } else {
+            return const MaterialApp(
+              home: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        });
   }
 }
