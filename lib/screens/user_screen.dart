@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:marocbeauty/consts/firebase_consts.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/screens/auth/login.dart';
@@ -30,6 +31,7 @@ class _UserScreenState extends State<UserScreen> {
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
     GlobalMethods globalMethods = GlobalMethods();
+    final googleSignIn = GoogleSignIn();
 
     TextEditingController();
     final User? user = authInstance.currentUser;
@@ -97,8 +99,12 @@ class _UserScreenState extends State<UserScreen> {
                         subtitle: "هل تريد تسجيل الخروج؟",
                         function: () => {
                               authInstance.signOut(),
+                              if (googleSignIn.currentUser != null)
+                                googleSignIn.signOut(),
                               globalMethods.navigateToPage(
-                                  context: context, page: LoginScreen.routeName)
+                                context: context,
+                                page: LoginScreen.routeName,
+                              )
                             }),
                     trailingIcon: null),
                 const SizedBox(
