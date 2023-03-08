@@ -28,10 +28,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  # badges: ^1.2.0
   card_swiper: ^2.0.4
   cupertino_icons: ^1.0.2
   fancy_shimmer_image: ^2.0.2
+  firebase_auth: ^4.2.10
+  firebase_core: ^2.7.1
   flutter:
     sdk: flutter
   flutter_iconly: ^1.0.2
