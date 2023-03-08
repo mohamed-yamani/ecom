@@ -1,6 +1,6 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:icon_badge/icon_badge.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/providers/cart_provider.dart';
@@ -57,17 +57,22 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
               label: "User",
             ),
             BottomNavigationBarItem(
-              icon: Badge(
-                badgeStyle:
-                    BadgeStyle(badgeColor: Theme.of(context).primaryColor),
-                showBadge: cartProvider.getCartItems.isNotEmpty,
-                badgeContent: FittedBox(
-                  child: Text(
-                    cartProvider.getCartItems.length.toString(),
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-                child: const Icon(CupertinoIcons.cart),
+              icon: IconBadge(
+                // badgeStyle:
+                //     BadgeStyle(badgeColor: Theme.of(context).primaryColor),
+                // showBadge: cartProvider.getCartItems.isNotEmpty,
+                // badgeContent: FittedBox(
+                //   child: Text(
+                //     cartProvider.getCartItems.length.toString(),
+                //     style: const TextStyle(color: Colors.white),
+                //   ),
+                // ),
+                itemCount: cartProvider.getCartItems.length,
+                badgeColor: Theme.of(context).primaryColor,
+                right: 0,
+                top: 0,
+                hideZero: true,
+                icon: const Icon(CupertinoIcons.cart),
               ),
               label: "Cart",
             ),

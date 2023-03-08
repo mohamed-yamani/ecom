@@ -28,18 +28,19 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  # badges: ^1.2.0
   card_swiper: ^2.0.4
   cupertino_icons: ^1.0.2
   fancy_shimmer_image: ^2.0.2
   flutter:
     sdk: flutter
   flutter_iconly: ^1.0.2
-  ionicons: ^0.2.2
-  provider: ^6.0.5
-  badges: ^3.0.2
-  shared_preferences: ^2.0.17
   flutter_localizations:
     sdk: flutter
+  icon_badge: ^1.0.0
+  ionicons: ^0.2.2
+  provider: ^6.0.5
+  shared_preferences: ^2.0.17
 
 dev_dependencies:
   flutter_lints: ^2.0.0

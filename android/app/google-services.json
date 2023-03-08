@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "248792737287",
+    "project_id": "ecom-fc859",
+    "storage_bucket": "ecom-fc859.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248792737287:android:858f65f099114a69af2ca2",
+        "android_client_info": {
+          "package_name": "com.marocbeauty.store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248792737287-drne16760500pcr5p4eaav47j7gi75ub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.marocbeauty.store",
+            "certificate_hash": "fa70cf65850e06982251029d6ed7769e26e9b871"
+          }
+        },
+        {
+          "client_id": "248792737287-92f5e4nuv3inno1mbufo5u5gafa53bs8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbHtLyvxFQVxrwwsP9WgrARL8hPFIVRu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248792737287-92f5e4nuv3inno1mbufo5u5gafa53bs8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
