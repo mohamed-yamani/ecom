@@ -1,9 +1,12 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marocbeauty/consts/firebase_consts.dart';
 import 'package:marocbeauty/models/products_model.dart';
 import 'package:marocbeauty/providers/cart_provider.dart';
 import 'package:marocbeauty/providers/products_provider.dart';
+import 'package:marocbeauty/screens/auth/login.dart';
 import 'package:marocbeauty/screens/product_details_screen.dart';
 import 'package:marocbeauty/services/global_methods.dart';
 import 'package:marocbeauty/services/utils.dart';
@@ -145,6 +148,20 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
               ),
               child: InkWell(
                 onTap: () {
+                  final User? user = authInstance.currentUser;
+                  if (user == null) {
+                    GlobalMethods().warningDialog(
+                        title: 'تنبيه',
+                        context: context,
+                        subtitle:
+                            'يجب تسجيل الدخول أولا لإضافة المنتجات إلى السلة',
+                        function: () {
+                          Navigator.pop(context);
+                          print('login');
+                          Navigator.pushNamed(context, LoginScreen.routeName);
+                        });
+                    return;
+                  }
                   if (!isInCart) {
                     cartProvider.addProductToCart(
                         productId: productModel.id, quantity: 1);

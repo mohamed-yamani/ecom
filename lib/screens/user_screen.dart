@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:marocbeauty/consts/firebase_consts.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
+import 'package:marocbeauty/screens/auth/login.dart';
 import 'package:marocbeauty/screens/orders/orders_screen.dart';
 import 'package:marocbeauty/services/global_methods.dart';
 import 'package:provider/provider.dart';
@@ -29,95 +32,119 @@ class _UserScreenState extends State<UserScreen> {
     GlobalMethods globalMethods = GlobalMethods();
 
     TextEditingController();
+    final User? user = authInstance.currentUser;
     return Scaffold(
       body: ListView(
         children: <Widget>[
-          listTile(
-              context: context,
-              icon: CupertinoIcons.person,
-              title: 'فلان الفلاني',
-              subtitle: 'فلان الفلاني',
-              onTap: () => {},
-              trailingIcon: null),
-          const SizedBox(
-            height: 20,
-          ),
-          listTile(
-              context: context,
-              icon: CupertinoIcons.phone,
-              title: 'الهاتف',
-              subtitle: '+33 6 00 00 00 00',
-              onTap: () => {},
-              trailingIcon: null),
-          const SizedBox(
-            height: 20,
-          ),
-          listTile(
-              context: context,
-              icon: CupertinoIcons.location,
-              title: 'العنوان',
-              subtitle: 'المغرب, الرباط',
-              onTap: () async {
-                _showAddressDialog();
-              },
-              trailingIcon: null),
-          const SizedBox(
-            height: 20,
-          ),
-          // orders
-          listTile(
-              context: context,
-              icon: CupertinoIcons.bag,
-              title: 'الطلبات',
-              subtitle: 'عرض الطلبات',
-              onTap: () => {
-                    globalMethods.navigateToPage(
-                        context: context, page: OrdersScreen.routeName)
-                  },
-              trailingIcon: null),
-          const SizedBox(
-            height: 20,
-          ),
-          // addresses
+          if (user != null)
+            Column(
+              children: [
+                listTile(
+                    context: context,
+                    icon: CupertinoIcons.person,
+                    title: 'فلان الفلاني',
+                    subtitle: 'فلان الفلاني',
+                    onTap: () => {},
+                    trailingIcon: null),
+                const SizedBox(
+                  height: 20,
+                ),
+                listTile(
+                    context: context,
+                    icon: CupertinoIcons.phone,
+                    title: 'الهاتف',
+                    subtitle: '+33 6 00 00 00 00',
+                    onTap: () => {},
+                    trailingIcon: null),
+                const SizedBox(
+                  height: 20,
+                ),
+                listTile(
+                    context: context,
+                    icon: CupertinoIcons.location,
+                    title: 'العنوان',
+                    subtitle: 'المغرب, الرباط',
+                    onTap: () async {
+                      _showAddressDialog();
+                    },
+                    trailingIcon: null),
+                const SizedBox(
+                  height: 20,
+                ),
+                // orders
+                listTile(
+                    context: context,
+                    icon: CupertinoIcons.bag,
+                    title: 'الطلبات',
+                    subtitle: 'عرض الطلبات',
+                    onTap: () => {
+                          globalMethods.navigateToPage(
+                              context: context, page: OrdersScreen.routeName)
+                        },
+                    trailingIcon: null),
+                const SizedBox(
+                  height: 20,
+                ),
 
-          // Wishlist
-          // listTile(
-          //     context: context,
-          //     icon: CupertinoIcons.heart,
-          //     title: 'Wishlist',
-          //     subtitle: 'View your wishlist',
-          //     onTap: () => {},
-          //     trailingIcon: null),
-          // const SizedBox(
-          //   height: 20,
-          // ),
-          // Viewed products
-          listTile(
-              context: context,
-              icon: CupertinoIcons.eyeglasses,
-              title: 'المنتجات المشاهدة',
-              subtitle: 'عرض المنتجات المشاهدة',
-              onTap: () => {},
-              trailingIcon: null),
-          // logout
-          const SizedBox(
-            height: 20,
-          ),
-          listTile(
-              context: context,
-              icon: CupertinoIcons.arrow_uturn_left,
-              title: 'تسجيل الخروج',
-              subtitle: 'تسجيل الخروج',
-              onTap: () => GlobalMethods().warningDialog(
-                  context: context,
-                  title: "تسجيل الخروج",
-                  subtitle: "هل تريد تسجيل الخروج؟",
-                  function: () => {}),
-              trailingIcon: null),
-          const SizedBox(
-            height: 20,
-          ),
-
+                listTile(
+                    context: context,
+                    icon: CupertinoIcons.arrow_uturn_left,
+                    title: 'تسجيل الخروج',
+                    subtitle: 'تسجيل الخروج',
+                    onTap: () => GlobalMethods().warningDialog(
+                        context: context,
+                        title: "تسجيل الخروج",
+                        subtitle: "هل تريد تسجيل الخروج؟",
+                        function: () => {
+                              authInstance.signOut(),
+                              globalMethods.navigateToPage(
+                                  context: context, page: LoginScreen.routeName)
+                            }),
+                    trailingIcon: null),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+          if (user == null)
+            Column(
+              children: [
+                SizedBox(
+                  height: 120,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        'يجب عليك تسجيل الدخول أولا',
+                        style: TextStyle(
+                            color: themeState.getDarkTheme
+                                ? Colors.white
+                                : Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                listTile(
+                    context: context,
+                    icon: CupertinoIcons.person,
+                    title: 'تسجيل الدخول',
+                    subtitle: 'إضغط هنا لتسجيل الدخول',
+                    onTap: () => GlobalMethods().warningDialog(
+                        context: context,
+                        title: "تسجيل الدخول",
+                        subtitle: "هل تريد تسجيل الدخول؟",
+                        function: () => {
+                              authInstance.signOut(),
+                              globalMethods.navigateToPage(
+                                  context: context, page: LoginScreen.routeName)
+                            }),
+                    trailingIcon: null),
+              ],
+            ),
           Center(
               child: SwitchListTile(
                   title: Text('السمة',

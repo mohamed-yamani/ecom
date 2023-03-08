@@ -72,8 +72,8 @@ class GlobalMethods {
                   )),
               TextButton(
                   onPressed: () {
-                    function();
                     Navigator.of(context).pop();
+                    function();
                   },
                   child: Text(
                     'موافق',
