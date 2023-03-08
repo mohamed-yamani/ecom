@@ -8,7 +8,7 @@ import 'package:marocbeauty/services/utils.dart';
 import 'package:provider/provider.dart';
 
 class ForgetPassword extends StatefulWidget {
-  static const routeName = '/sign-up';
+  static const routeName = '/forget-password';
   const ForgetPassword({Key? key}) : super(key: key);
 
   @override
