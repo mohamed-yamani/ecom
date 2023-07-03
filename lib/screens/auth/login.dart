@@ -25,6 +25,12 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscureText = true;
 
   @override
+  void initState() {
+    super.initState();
+    // fetchProducts
+  }
+
+  @override
   void dispose() {
     _emailextController.dispose();
     _passwordController.dispose();
@@ -291,7 +297,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               'أو تابع كضيف',
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyText1!
+                                  .bodyLarge!
                                   .copyWith(color: Colors.white),
                             ),
                             SizedBox(
@@ -329,6 +335,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
-
 }
