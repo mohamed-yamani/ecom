@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icon_badge/icon_badge.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/providers/cart_provider.dart';
+import 'package:marocbeauty/providers/products_provider.dart';
 import 'package:marocbeauty/screens/cart/cart_screen.dart';
 import 'package:marocbeauty/screens/categories_screen.dart';
 import 'package:marocbeauty/screens/contact_us.dart';
@@ -28,6 +28,15 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     {'page': CategoriesScreen(), 'title': 'الفئات'},
     {'page': HomeScreen(), 'title': 'Home'},
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    final productsProvider =
+        Provider.of<ProductsProvider>(context, listen: false);
+    productsProvider.fetchProducts();
+    // fetchProducts
+  }
 
   void _changeSelectedPageIndex(int index) {
     setState(() {
