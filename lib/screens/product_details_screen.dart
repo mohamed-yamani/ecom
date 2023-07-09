@@ -1,6 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/providers/cart_provider.dart';
 import 'package:marocbeauty/providers/products_provider.dart';
@@ -8,6 +9,7 @@ import 'package:marocbeauty/services/global_methods.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:marocbeauty/widgets/title_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   static const routeName = '/product-details';
@@ -28,8 +30,59 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     final getCurrentProduct = productProviders.findProductById(productId);
     final cartProvider = Provider.of<CartProvider>(context);
     bool isInCart = cartProvider.getCartItems.containsKey(productId);
+    void sendWhatsAppMessage({required String message}) async {
+      final Uri url = Uri(
+        scheme: 'https',
+        path: 'wa.me/+212677005549',
+        queryParameters: <String, String>{
+          'text': message,
+        },
+      );
+      if (!await launchUrl(
+        url,
+        mode: LaunchMode.externalApplication,
+      )) {
+        throw Exception('Could not launch $url');
+      }
+    }
 
     return Scaffold(
+      //floating whatsapp button
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 10, right: 40, left: 50),
+        child: Row(
+          children: [
+            FloatingActionButton(
+              onPressed: () {
+                sendWhatsAppMessage(
+                    message: "مرحبا، أريد شراء ${getCurrentProduct.title}");
+              },
+              backgroundColor: themeState.getDarkTheme
+                  ? const Color.fromARGB(255, 45, 45, 45)
+                  : Colors.white,
+              enableFeedback: true,
+              child: const Icon(FontAwesomeIcons.whatsapp,
+                  size: 40, color: Color.fromARGB(255, 252, 8, 195)),
+            ),
+            const SizedBox(width: 10),
+            FloatingActionButton(
+              onPressed: () async {
+                final Uri launchUri = Uri(
+                  scheme: 'tel',
+                  path: '+212677005549',
+                );
+                await launchUrl(launchUri);
+              },
+              backgroundColor: themeState.getDarkTheme
+                  ? const Color.fromARGB(255, 45, 45, 45)
+                  : Colors.white,
+              enableFeedback: true,
+              child: const Icon(CupertinoIcons.phone,
+                  size: 40, color: Color.fromARGB(255, 252, 8, 195)),
+            ),
+          ],
+        ),
+      ),
       body: Stack(
         children: [
           Column(
@@ -102,13 +155,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      getCurrentProduct.details,
-                      style: themeState.getDarkTheme
-                          ? const TextStyle(color: Colors.white, fontSize: 15)
-                          : const TextStyle(color: Colors.black, fontSize: 15),
-                      // textDirection: TextDirection.rtl,
-                      // textAlign: TextAlign.right,
+                    SizedBox(
+                      width: size.width,
+                      child: Text(
+                        getCurrentProduct.details,
+                        style: themeState.getDarkTheme
+                            ? const TextStyle(color: Colors.white, fontSize: 15)
+                            : const TextStyle(
+                                color: Colors.black, fontSize: 15),
+                        // textDirection: TextDirection.rtl,
+                        // textAlign: TextAlign.right,
+                      ),
                     ),
                   ],
                 ),
@@ -126,14 +183,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 children: [
                   const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      'التوصيل بالمجان',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 252, 8, 195),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                    // child: Text(
+                    //   'التوصيل بالمجان',
+                    //   style: TextStyle(
+                    //     color: Color.fromARGB(255, 252, 8, 195),
+                    //     fontSize: 20,
+                    //     fontWeight: FontWeight.w500,
+                    //   ),
+                    // ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:marocbeauty/consts/theme_data.dart';
+import 'package:marocbeauty/fetch_screen.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/providers/cart_provider.dart';
 import 'package:marocbeauty/providers/products_provider.dart';
@@ -32,6 +34,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   DarkThemeProvider themeChangeProvider = DarkThemeProvider();
+  bool isUserLoggedIn = false;
 
   void getCurrentAppTheme() async {
     themeChangeProvider.setDarkTheme =
@@ -41,7 +44,26 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     getCurrentAppTheme();
+    checkIfUserLoggedIn();
     super.initState();
+  }
+
+  Future<bool> checkIfUserLoggedIn() async {
+    // ignore: await_only_futures
+    await Firebase.initializeApp();
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    if (user != null) {
+      setState(() {
+        isUserLoggedIn = true;
+      });
+      return true;
+    } else {
+      setState(() {
+        isUserLoggedIn = false;
+      });
+      return false;
+    }
   }
 
   // This widget is the root of your application.
@@ -88,7 +110,10 @@ class _MyAppState extends State<MyApp> {
                   title: 'Flutter Demo',
                   theme: Styles.themeData(themeProvider.getDarkTheme, context),
                   // home: const BottomBarScreen(),
-                  home: const LoginScreen(),
+                  home: isUserLoggedIn
+                      ? const BottomBarScreen()
+                      // : const LoginScreen(),
+                      : const BottomBarScreen(),
                   routes: {
                     // HomeScreen.routeName: (context) => const HomeScreen(),
                     AllProductsWidget.routeName: (context) =>
@@ -102,6 +127,7 @@ class _MyAppState extends State<MyApp> {
                     LoginScreen.routeName: (context) => const LoginScreen(),
                     ForgetPassword.routeName: (context) =>
                         const ForgetPassword(),
+                    FetchScreen.routeName: (context) => const FetchScreen(),
                   },
                 );
               }),

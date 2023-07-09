@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:marocbeauty/models/products_model.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/providers/cart_provider.dart';
+import 'package:marocbeauty/providers/products_provider.dart';
 import 'package:marocbeauty/screens/cart/cart_widget.dart';
 import 'package:marocbeauty/screens/empty_screen.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -48,6 +50,24 @@ class CheckOutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
+    final cartItemsList =
+        cartProvider.getCartItems.values.toList().reversed.toList();
+
+    final productsProvider = Provider.of<ProductsProvider>(context);
+    List<ProductModel> productsList = [];
+
+    for (int i = 0; i < cartItemsList.length; i++) {
+      ProductModel item =
+          productsProvider.findProductById(cartItemsList[i].productId);
+      productsList.add(item);
+    }
+
+    double total = 0;
+    for (int i = 0; i < cartItemsList.length; i++) {
+      total += productsList[i].SalePrice * cartItemsList[i].quantity;
+    }
+
     return Positioned(
       bottom: 0,
       child: Container(
@@ -57,11 +77,11 @@ class CheckOutWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                '1000 درهم',
-                style: TextStyle(
+                '${total} MAD',
+                style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
                 ),
@@ -87,11 +107,26 @@ class CheckOutWidget extends StatelessWidget {
                   onPrimary:
                       themeState.getDarkTheme ? Colors.black : Colors.white,
                 ),
-                child: const Text(
-                  'اشتري الآن وادفع لاحقًا',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
+                child: InkWell(
+                  onTap: () {
+                    int index = 0;
+                    sendWhatsAppMessage(
+                      total: total.toString(),
+                      message: productsList
+                          .map(
+                            (cartItem) =>
+                                // '${cartItem.title} - ${cartItem.price} - ${cartItemsList[index++].quantity}',
+                                'اسم المنتج: ${cartItem.title} \nالسعر: ${cartItem.SalePrice} \nالكمية: ${cartItemsList[index++].quantity} \n',
+                          )
+                          .toString(),
+                    );
+                  },
+                  child: const Text(
+                    'اشتري الآن وادفعي لاحقًا',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
@@ -100,5 +135,23 @@ class CheckOutWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void sendWhatsAppMessage(
+      {required String message, required String total}) async {
+    final Uri url = Uri(
+      scheme: 'https',
+      path: 'wa.me/+212677005549',
+      queryParameters: <String, String>{
+        'text': '$message\nالمجموع: $total MAD',
+      },
+    );
+
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

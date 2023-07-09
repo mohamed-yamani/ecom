@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:icon_badge/icon_badge.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/providers/cart_provider.dart';
@@ -20,14 +21,14 @@ class BottomBarScreen extends StatefulWidget {
 }
 
 class _BottomBarScreenState extends State<BottomBarScreen> {
-  int _selectedPageIndex = 4;
   final List<Map<String, dynamic>> _pages = const [
     {'page': ContactUsScreen(), 'title': 'Contact Us'},
-    {'page': UserScreen(), 'title': 'User'},
+    // {'page': UserScreen(), 'title': 'User'},
     {'page': CartScreen(), 'title': 'Cart'},
     {'page': CategoriesScreen(), 'title': 'الفئات'},
     {'page': HomeScreen(), 'title': 'Home'},
   ];
+  late int _selectedPageIndex;
 
   @override
   void initState() {
@@ -35,6 +36,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     final productsProvider =
         Provider.of<ProductsProvider>(context, listen: false);
     productsProvider.fetchProducts();
+    _selectedPageIndex =
+        _pages.indexWhere((element) => element['title'] == 'Home');
     // fetchProducts
   }
 
@@ -58,13 +61,13 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           showUnselectedLabels: false,
           items: [
             const BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.phone_arrow_up_right),
+              icon: Icon(FontAwesomeIcons.whatsapp),
               label: "Contact Us",
             ),
-            const BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.person),
-              label: "User",
-            ),
+            // const BottomNavigationBarItem(
+            //   icon: Icon(CupertinoIcons.person),
+            //   label: "User",
+            // ),
             BottomNavigationBarItem(
               icon: IconBadge(
                 // badgeStyle:

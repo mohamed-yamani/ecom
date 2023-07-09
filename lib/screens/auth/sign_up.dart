@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marocbeauty/consts/constss.dart';
 import 'package:marocbeauty/consts/firebase_consts.dart';
+import 'package:marocbeauty/fetch_screen.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/screens/auth/login.dart';
 import 'package:marocbeauty/screens/bottom_bar_screen.dart';
@@ -62,7 +63,7 @@ class _SignUpState extends State<SignUp> {
                 email: _emailextController.text.toLowerCase().trim(),
                 password: _passwordController.text)
             .then((value) {
-          Navigator.of(context).pushReplacementNamed(BottomBarScreen.routeName);
+          Navigator.of(context).pushReplacementNamed(FetchScreen.routeName);
           Toast.show(
             'تم التسجيل بنجاح',
           );
