@@ -65,7 +65,7 @@ class CheckOutWidget extends StatelessWidget {
 
     double total = 0;
     for (int i = 0; i < cartItemsList.length; i++) {
-      total += productsList[i].SalePrice * cartItemsList[i].quantity;
+      total += productsList[i].salePrice * cartItemsList[i].quantity;
     }
 
     return Positioned(
@@ -116,7 +116,7 @@ class CheckOutWidget extends StatelessWidget {
                           .map(
                             (cartItem) =>
                                 // '${cartItem.title} - ${cartItem.price} - ${cartItemsList[index++].quantity}',
-                                'اسم المنتج: ${cartItem.title} \nالسعر: ${cartItem.SalePrice} \nالكمية: ${cartItemsList[index++].quantity} \n',
+                                'اسم المنتج: ${cartItem.title} \nالسعر: ${cartItem.salePrice} \nالكمية: ${cartItemsList[index++].quantity} \n',
                           )
                           .toString(),
                     );

@@ -7,7 +7,7 @@ class ProductModel with ChangeNotifier {
       productCategoryName,
       details,
       productCategoryId;
-  final double price, SalePrice;
+  final double price, salePrice;
   final bool isOnSale, isPiece, isNew, isBestSeller;
 
   ProductModel({
@@ -18,7 +18,7 @@ class ProductModel with ChangeNotifier {
     required this.isOnSale,
     required this.isPiece,
     required this.productCategoryName,
-    required this.SalePrice,
+    required this.salePrice,
     required this.details,
     required this.productCategoryId,
     required this.isNew,

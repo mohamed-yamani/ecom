@@ -114,7 +114,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           // crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             if (getCurrentProduct.price >
-                                getCurrentProduct.SalePrice)
+                                getCurrentProduct.salePrice)
                               Text(
                                 getCurrentProduct.price.toStringAsFixed(2),
                                 style: themeState.getDarkTheme
@@ -133,18 +133,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               width: 10,
                             ),
                             Text(
-                              "${getCurrentProduct.SalePrice.toStringAsFixed(2)} درهم",
+                              "${getCurrentProduct.salePrice.toStringAsFixed(2)} درهم",
                               style: themeState.getDarkTheme
                                   ? TextStyle(
                                       color: (getCurrentProduct.price >
-                                              getCurrentProduct.SalePrice)
+                                              getCurrentProduct.salePrice)
                                           ? Theme.of(context).primaryColor
                                           : Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold)
                                   : TextStyle(
                                       color: (getCurrentProduct.price >
-                                              getCurrentProduct.SalePrice)
+                                              getCurrentProduct.salePrice)
                                           ? Theme.of(context).primaryColor
                                           : Colors.black,
                                       fontSize: 20,
