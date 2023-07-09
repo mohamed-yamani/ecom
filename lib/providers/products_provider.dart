@@ -54,23 +54,29 @@ class ProductsProvider with ChangeNotifier {
         await FirebaseFirestore.instance.collection("products").get();
     if (querySnapshot.docs.isNotEmpty) {
       print("data" + querySnapshot.docs.toString());
-      querySnapshot.docs.forEach((element) {
-        productsList.add(
-          ProductModel(
-            id: element.id,
-            productCategoryId: element.get("productCategoryName"),
-            title: element.get("title"),
-            imageUrl: element.get("imageUrl"),
-            price: double.parse(element.get("price")),
-            isOnSale: element.get("isOnSale"),
-            isPiece: element.get("isPiece"),
-            productCategoryName: element.get("productCategoryName"),
-            SalePrice: element.get("salePrice"),
-            // details: element.get("details"),
-            details: "details here",
-          ),
-        );
-      });
+      try {
+        querySnapshot.docs.forEach((element) {
+          productsList.add(
+            ProductModel(
+              id: element.id,
+              productCategoryId: element.get("productCategoryName"),
+              title: element.get("title"),
+              imageUrl: element.get("imageUrl"),
+              price: double.parse(element.get("price")),
+              isOnSale: element.get("isOnSale"),
+              isPiece: element.get("isPiece"),
+              productCategoryName: element.get("productCategoryName"),
+              SalePrice: element.get("salePrice"),
+              // details: element.get("details"),
+              details: element.get("description"),
+              isNew: element.get("isNew"),
+              isBestSeller: element.get("isBestSeller"),
+            ),
+          );
+        });
+      } catch (e) {
+        print(e);
+      }
     } else {
       print("No data");
     }

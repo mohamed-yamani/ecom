@@ -1,11 +1,12 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marocbeauty/consts/constss.dart';
+import 'package:marocbeauty/fetch_screen.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/screens/auth/forget_password.dart';
 import 'package:marocbeauty/screens/auth/sign_up.dart';
-import 'package:marocbeauty/screens/bottom_bar_screen.dart';
 import 'package:marocbeauty/services/utils.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +43,15 @@ class _LoginScreenState extends State<LoginScreen> {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if (isValid) {
-      print('The form is valid');
+      FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: _emailextController.text,
+              password: _passwordController.text)
+          .then((value) {
+        Navigator.pushReplacementNamed(context, FetchScreen.routeName);
+      }).catchError((error) {
+        Utils(context).showSnackBar(error.toString());
+      });
     }
   }
 
@@ -107,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Text(
                     'مرحبًا بعودتك',
-                    style: Theme.of(context).textTheme.headline3!.copyWith(
+                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
                         color: Colors.white, fontWeight: FontWeight.w500),
                   ),
                   SizedBox(
@@ -115,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Text(
                     'سجل دخولك للمتابعة',
-                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         color: Colors.white, fontWeight: FontWeight.w500),
                   ),
                   SizedBox(
@@ -130,7 +139,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           onEditingComplete: () => FocusScope.of(context)
                               .requestFocus(_passFocusNode),
                           controller: _emailextController,
+                          cursorColor: Colors.white,
                           keyboardType: TextInputType.emailAddress,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: Colors.white),
                           validator: (value) {
                             if (value!.isEmpty || !value.contains('@')) {
                               return 'الرجاء إدخال عنوان بريد إلكتروني صالح';
@@ -142,8 +156,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             labelText: 'البريد الإلكتروني',
                             labelStyle: Theme.of(context)
                                 .textTheme
-                                .bodyText1!
+                                .bodyLarge!
                                 .copyWith(color: Colors.white),
+                            focusColor: Colors.white,
+                            fillColor: Colors.white,
                             enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.white,
@@ -170,6 +186,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           focusNode: _passFocusNode,
                           obscureText: _obscureText,
                           controller: _passwordController,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: Colors.white),
                           keyboardType: TextInputType.visiblePassword,
                           validator: (value) {
                             if (value!.isEmpty || value.length < 5) {
@@ -195,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             labelText: 'كلمة المرور',
                             labelStyle: Theme.of(context)
                                 .textTheme
-                                .bodyText1!
+                                .bodyLarge!
                                 .copyWith(color: Colors.white),
                             enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
@@ -306,7 +326,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             InkWell(
                               onTap: () {
                                 Navigator.of(context).pushReplacementNamed(
-                                  BottomBarScreen.routeName,
+                                  FetchScreen.routeName,
                                 );
                               },
                               child: Container(

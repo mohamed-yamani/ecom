@@ -1,6 +1,5 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:marocbeauty/consts/constss.dart';
 import 'package:marocbeauty/models/products_model.dart';
 import 'package:marocbeauty/provider/dark_theme_provider.dart';
 import 'package:marocbeauty/providers/products_provider.dart';
@@ -14,6 +13,7 @@ import 'package:provider/provider.dart';
 List images = [
   'assets/images/slider1.png',
   'assets/images/slider2.png',
+  'assets/images/slider3.png',
 ];
 
 class HomeScreen extends StatelessWidget {
@@ -154,15 +154,19 @@ class HomeScreen extends StatelessWidget {
                     // physics: const NeverScrollableScrollPhysics(),
                     itemCount: allProducts.length,
                     itemBuilder: (context, index) {
-                      return ChangeNotifierProvider.value(
-                        value: allProducts[index],
-                        child: ProductContainerWidget(
-                          height: size.height * 0.21,
-                          width: size.height * 0.193,
-                          imgHeight: size.height * 0.16,
-                          imgWidth: size.height * 0.16,
-                        ),
-                      );
+                      if (allProducts[index].isNew) {
+                        return ChangeNotifierProvider.value(
+                          value: allProducts[index],
+                          child: ProductContainerWidget(
+                            height: size.height * 0.21,
+                            width: size.height * 0.193,
+                            imgHeight: size.height * 0.16,
+                            imgWidth: size.height * 0.16,
+                          ),
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
                     },
                   ),
                 ),
@@ -211,15 +215,19 @@ class HomeScreen extends StatelessWidget {
                     // physics: const NeverScrollableScrollPhysics(),
                     itemCount: allProducts.length,
                     itemBuilder: (context, index) {
-                      return ChangeNotifierProvider.value(
-                        value: allProducts[index],
-                        child: ProductContainerWidget(
-                          height: size.height * 0.21,
-                          width: size.height * 0.193,
-                          imgHeight: size.height * 0.16,
-                          imgWidth: size.height * 0.16,
-                        ),
-                      );
+                      if (allProducts[index].isBestSeller) {
+                        return ChangeNotifierProvider.value(
+                          value: allProducts[index],
+                          child: ProductContainerWidget(
+                            height: size.height * 0.21,
+                            width: size.height * 0.193,
+                            imgHeight: size.height * 0.16,
+                            imgWidth: size.height * 0.16,
+                          ),
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
                     },
                   ),
                 ),
