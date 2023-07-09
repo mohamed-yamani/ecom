@@ -87,7 +87,7 @@ class _CartWidgetState extends State<CartWidget> {
                           height: 5,
                         ),
                         Text(
-                          getProduct.SalePrice.toStringAsFixed(2),
+                          getProduct.salePrice.toStringAsFixed(2),
                           style: TextStyle(
                             color: themeState.getDarkTheme
                                 ? Colors.grey

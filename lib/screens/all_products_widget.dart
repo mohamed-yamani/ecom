@@ -25,12 +25,9 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
 
   void getProductsList() {
     final productProvider = Provider.of<ProductsProvider>(context);
-    String category = "";
-    try {
-      String category = ModalRoute.of(context)!.settings.arguments as String;
-    } catch (e) {
-      print(e);
-    }
+
+    final category = ModalRoute.of(context)!.settings.arguments as String;
+
     if (category.toLowerCase().contains("OnSale".toLowerCase())) {
       allProducts = productProvider.getOnSaleProducts;
     } else {

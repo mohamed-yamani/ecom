@@ -50,6 +50,13 @@ class HomeScreen extends StatelessWidget {
                 autoplay: true,
                 autoplayDelay: 7000,
                 autoplayDisableOnInteraction: true,
+                control: const SwiperControl(
+                  color: Colors.white,
+                  size: 20,
+                ),
+                curve: Curves.easeIn,
+                fade: 0.5,
+                loop: true,
               ),
             ),
             Column(

@@ -84,10 +84,10 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
                         ),
                         child: Center(
                             child: calculatePourcentage(productModel.price,
-                                        productModel.SalePrice) >
+                                        productModel.salePrice) >
                                     0
                                 ? Text(
-                                    'تخفيض ${calculatePourcentage(productModel.price, productModel.SalePrice)}%',
+                                    'تخفيض ${calculatePourcentage(productModel.price, productModel.salePrice)}%',
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 12,
@@ -129,7 +129,7 @@ class _ProductContainerWidgetState extends State<ProductContainerWidget> {
               ],
             ),
             PriceWidget(
-              price: productModel.SalePrice,
+              price: productModel.salePrice,
               oldPrice: productModel.price,
               width: widget.imgWidth,
             ),

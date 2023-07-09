@@ -10,7 +10,7 @@ class ProductsProvider with ChangeNotifier {
 
   List<ProductModel> get getOnSaleProducts {
     return productsList
-        .where((element) => element.price > element.SalePrice)
+        .where((element) => element.price > element.salePrice)
         .toList();
   }
 
@@ -19,7 +19,7 @@ class ProductsProvider with ChangeNotifier {
       return productsList;
     } else if (category.toLowerCase().contains("onsale")) {
       return productsList
-          .where((element) => element.price > element.SalePrice)
+          .where((element) => element.price > element.salePrice)
           .toList();
     } else {
       return productsList
@@ -54,29 +54,26 @@ class ProductsProvider with ChangeNotifier {
         await FirebaseFirestore.instance.collection("products").get();
     if (querySnapshot.docs.isNotEmpty) {
       print("data" + querySnapshot.docs.toString());
-      try {
-        querySnapshot.docs.forEach((element) {
-          productsList.add(
-            ProductModel(
-              id: element.id,
-              productCategoryId: element.get("productCategoryName"),
-              title: element.get("title"),
-              imageUrl: element.get("imageUrl"),
-              price: double.parse(element.get("price")),
-              isOnSale: element.get("isOnSale"),
-              isPiece: element.get("isPiece"),
-              productCategoryName: element.get("productCategoryName"),
-              SalePrice: element.get("salePrice"),
-              // details: element.get("details"),
-              details: element.get("description"),
-              isNew: element.get("isNew"),
-              isBestSeller: element.get("isBestSeller"),
-            ),
-          );
-        });
-      } catch (e) {
-        print(e);
-      }
+
+      querySnapshot.docs.forEach((element) {
+        productsList.add(
+          ProductModel(
+            id: element.id,
+            productCategoryId: element.get("productCategoryName"),
+            title: element.get("title"),
+            imageUrl: element.get("imageUrl"),
+            price: double.parse(element.get("price")),
+            isOnSale: element.get("isOnSale"),
+            isPiece: element.get("isPiece"),
+            productCategoryName: element.get("productCategoryName"),
+            salePrice: double.parse(element.get("salePrice").toString()),
+            // details: element.get("details"),
+            details: element.get("description"),
+            isNew: element.get("isNew"),
+            isBestSeller: element.get("isBestSeller"),
+          ),
+        );
+      });
     } else {
       print("No data");
     }
